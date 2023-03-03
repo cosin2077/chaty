@@ -1,12 +1,11 @@
+👋 欢迎！
+Supo是一个开源项目，可以通过“npm i -g supo”进行安装，旨在提供多种服务选项，包括私人Web服务、Telegram Bot服务、NodeJS API服务和微信机器人服务。
 
-👋 欢迎您的关注！
-Supo 是一个开源项目。这是一个可供 npm i -g supo 安装的 AI 聊天机器人服务，旨在提供多种服务选项，包括私有化 web 服务、NodeJS API服务、Telegram Bot 服务和微信机器人服务等。
+Supo由gpt-3.5-turbo（OpenAI提供的最新优秀API）提供支持。
 
-Supo 使用了 GPT（Generative Pre-trained Transformer）技术，基于 Transformer 模型。通过自然语言处理技术，Supo 可以与用户实现高度纯化的互动界面，从而实现更好的聊天体验。
+## 安装🤖
 
-## 安装
-
-Supo 是一个基于 Node.js 中间件的应用程序，可以通过以下命令进行安装：
+Supo是一个基于Node.js的应用程序，可以使用以下命令进行安装：
 
 ```
 npm i -g supo

@@ -1,11 +1,11 @@
-👋 Welcome!
-Supo is an open source project! This is an AI chatbot service that can be installed with 'npm i -g supo', and it aims to provide multiple service options, including private web service, Telegram Bot service, and WeChat robot service.
+👋 Welcome!  
+Supo is an open source project! which can be installed with 'npm i -g supo', and it aims to provide multiple service options, including private web service, Telegram Bot service, NodeJS API service, and WeChat robot service.
 
-Supo uses GPT (Generative Pre-trained Transformer) technology, based on the Transformer model. Through natural language processing, Supo can achieve highly purified interactive interface with users, realizing better chatting experience.
+Supo is powered by gpt-3.5-turbo (latest excellent API provided by openAI).
 
 ## Installation🤖
 
-Supo is a middleware application based on Node.js, and can be installed with the following command:
+Supo is a application based on Node.js, and can be installed with the following command:
 
 ```
 npm i -g supo
@@ -16,7 +16,7 @@ npm i -g supo
 Supo provides multiple service options, and you can choose the most suitable one according to your needs.
 ```
 -[x] Private Web Service🚀  
--[x] NodeJS Api Service   
+-[x] NodeJS API Service   
 -[x] Telegram Bot Service🤖  
 -[x] WeChat Robot Service💬   
 ```
