@@ -1,0 +1,35 @@
+{
+  "name": "supo",
+  "description": "👋 Welcome to the Supo open source project! This is an AI chatbot service that can be installed with 'npm i -g supo', and it aims to provide multiple service options, including private web service, Telegram Bot service, and WeChat robot service.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cosin2077/supo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cosin2077/supo/issues"
+  },
+  "homepage": "https://github.com/cosin2077/supo#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "axios": "^1.3.4",
+    "colors": "^1.4.0",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.3",
+    "minimst": "^0.0.1-security",
+    "openai": "^3.2.1",
+    "qrcode-terminal": "^0.12.0",
+    "wechaty": "^1.20.2"
+  }
+}

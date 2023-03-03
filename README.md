@@ -14,11 +14,12 @@ npm i -g supo
 ## 服务
 
 Supo 提供多种不同的服务选项，您可根据自己需求选择合适的服务。  
+```
 -[x] 私有化web服务  
 -[x] NodeJS API服务  
 -[x] Telegram Bot 服务  
 -[x] 微信机器人服务  
-
+```
 ### 私有化 web 服务
 
 Supo 可以同时提供私有化的 web 服务，您可以随时通过访问 http://localhost:3000 访问您创建的 Supo 服务。

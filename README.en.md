@@ -13,11 +13,12 @@ npm i -g supo
 ## Services🌍
 
 Supo provides multiple service options, and you can choose the most suitable one according to your needs.
+```
 -[x] Private Web Service🚀  
 -[x] NodeJS Api Service   
 -[x] Telegram Bot Service🤖  
 -[x] WeChat Robot Service💬   
-
+```
 ### Private Web Service🚀
 
 
