@@ -1,0 +1,14 @@
+.history p {
+  line-height: 36px;
+  font-size: 24px;
+}
+
+.history p .avatar {
+  margin-right: 20px;
+  font-size: 40px;
+}
+
+.history .assistant-history {
+  background-color: rgba(211, 211, 211, 0.252);
+  border-radius: 5px;;
+}

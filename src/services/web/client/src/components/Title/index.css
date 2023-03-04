@@ -1,0 +1,12 @@
+.chatbot-emoji {
+  font-size: 125px;
+}
+.title-text {
+  margin-top: -20px;
+  --un-gradient-from: rgba(56, 189, 248, var(--un-from-opacity, 1));
+  --un-gradient-to: rgba(56, 189, 248, 0);
+  --un-gradient-shape: to right;
+  --un-gradient-stops: var(--un-gradient-from), var(--un-gradient-to);
+  --un-gradient: var(--un-gradient-shape), var(--un-gradient-stops);
+  background-image: linear-gradient(var(--un-gradient));
+}

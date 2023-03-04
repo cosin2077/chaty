@@ -1,8 +1,12 @@
 {
   "name": "chaty",
   "description": "👋 Welcome to the Chaty open source project! This is an AI chatbot service that can be installed with 'npm i -g chaty', and it aims to provide multiple service options, including private web service, Telegram Bot service, and WeChat robot service.",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
+  "bin": {
+    "chaty": "./bin/index",
+    "ccc": "./bin/index"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

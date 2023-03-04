@@ -1,0 +1,58 @@
+:root {
+  --interaction-height: 50px;
+}
+.input {
+  height: var(--interaction-height);
+  margin: 0px 10px 0px 0px;
+  width: calc(100% - 300px);
+  border: solid 1px lightgray;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 24px;
+  outline: whitesmoke solid 1px;
+  color: grey;
+}
+.input:focus {
+  outline: black solid 2px;
+}
+.input:focus-visible {
+  outline: black solid 2px;
+}
+.send,
+.clear {
+  height: 60px;
+  margin: 5px;
+  background-color: #000000;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  transition: background-color 0.1s linear;
+}
+.send:hover, .clear:hover{
+  background-color: rgba(0,0,0,0.6);
+}
+.send:active, .clear:active{
+  background-color: rgba(0,0,0,0.85);
+}
+.send[disabled] {
+  background-color: rgba(54, 41, 41, 0.85);
+  cursor: not-allowed;
+}
+@media screen and (max-width: 620px) {
+  .input {
+    width: calc(100% - 20px);
+    display: block;
+  }
+  .send,
+  .clear {
+    height: 50px;
+    margin: 5px;
+    margin-top: 20px;
+    background-color: #000000;
+    color: white;
+    font-size: 20px;
+  }
+  .send {
+    margin-left: 0px;
+  }
+}

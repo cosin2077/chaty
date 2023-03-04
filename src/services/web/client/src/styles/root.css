@@ -12,6 +12,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  text-align: left;
 }
 
 a {
@@ -65,5 +66,16 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #root {
+    min-width: 960px;
+  }
+}
+@media screen and (max-width: 1023px) {
+  #root {
+    min-width: 80%;
   }
 }
