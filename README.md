@@ -3,7 +3,7 @@ Chaty is an open source project! which can be installed with 'npm i -g chaty', a
 
 Chaty is powered by gpt-3.5-turbo (latest excellent API provided by openAI).
 
-## Installation🤖
+## ⚙️Installation
 
 Chaty is a application based on Node.js, and can be installed with the following command:
 
@@ -11,7 +11,7 @@ Chaty is a application based on Node.js, and can be installed with the following
 npm i -g chaty
 ```
 
-## Services🌍
+## 🚀Services
 
 Chaty provides multiple service options, and you can choose the most suitable one according to your needs.
 ```
@@ -20,16 +20,16 @@ Chaty provides multiple service options, and you can choose the most suitable on
 -[x] Telegram Bot Service🤖  
 -[x] WeChat Robot Service💬   
 ```
-### Private Web Service🚀
+### 🌍Private Web Service
 
 
 Chaty can also provide a private web service, and you can access the Chaty service you created anytime by visiting http://localhost:3000.
 
-### Telegram Bot Service🤖
+### 🤖Telegram Bot Service
 
 Chaty can also provide Telegram Bot service, enabling your users to chat with Chaty in Telegram. Simply send a message to '@chatgpt_bot' to initiate the chatbot service.
 
-### WeChat Robot Service💬
+### 💬WeChat Robot Service
 
 
 Chaty can also provide a WeChat robot service, allowing you to chat with Chaty through a WeChat public account.
