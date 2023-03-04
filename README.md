@@ -5,14 +5,14 @@ You can use it to deploy your NodeJS API for chatGPT;
 You can use it to deploy your wechat chatGPT bot;  
 You can use it to deploy your telegram chatGPT bot;
 
-You install it with 'npm i -g chaty', and almost everything gets done!
+Install it simply with 'npm i -g chaty', and almost everything gets done!
 
 Chaty is powered by gpt-3.5-turbo (latest powerful API provided by openAI).
 
 ## ⚙️Installation
 
-Chaty is a application based on Node.js, and can be installed with the following command:
-
+Chaty is a application based on Node.js, and can be installed with the following command:  
+If you have not installed NodeJS, [click here](https://nodejs.org/)
 ```
 npm i -g chaty
 ```
