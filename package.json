@@ -1,17 +1,29 @@
 {
   "name": "chaty",
-  "description": "👋 Welcome to the Chaty open source project! This is an AI chatbot service that can be installed with 'npm i -g chaty', and it aims to provide multiple service options, including private web service, Telegram Bot service, and WeChat robot service.",
+  "description": "Chaty, satisfy all your imagination about chatGPT! deploy your chatGPT web service, api service, wechat bot service etc.",
   "version": "0.0.1",
   "main": "index.js",
+  "keywords": [
+    "chatGPT",
+    "chatbot",
+    "wechat",
+    "nodejs",
+    "telegram",
+    "chatGPT"
+  ],
   "bin": {
     "chaty": "./bin/index",
     "ccc": "./bin/index"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc && npm run copyWeb",
+    "copyWeb": "shx mkdir -p ./lib/services/web && shx cp -r ./src/services/web ./lib/services/"
   },
   "files": [
-    "lib"
+    "lib",
+    "bin",
+    "package.json",
+    "README.md"
   ],
   "repository": {
     "type": "git",
@@ -27,6 +39,7 @@
     "@types/debug": "^4.1.7",
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.14.5",
+    "shx": "^0.3.4",
     "typescript": "^4.9.5"
   },
   "dependencies": {
