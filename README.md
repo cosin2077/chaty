@@ -1,4 +1,4 @@
-## ✨✨✨Chaty is an open source satisfied all your imagination about chatGPT!  
+## ✨✨✨Chaty, satisfy all your imagination about chatGPT!  
 You can use it as a command-line assistant;  
 You can use it to deploy a private chatGPT service;  
 You can use it to deploy your NodeJS API for chatGPT;  
