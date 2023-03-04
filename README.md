@@ -1,19 +1,19 @@
 👋 Welcome!  
-Supo is an open source project! which can be installed with 'npm i -g supo', and it aims to provide multiple service options, including private web service, Telegram Bot service, NodeJS API service, and WeChat robot service.
+Chaty is an open source project! which can be installed with 'npm i -g chaty', and it aims to provide multiple service options, including private web service, Telegram Bot service, NodeJS API service, and WeChat robot service.
 
-Supo is powered by gpt-3.5-turbo (latest excellent API provided by openAI).
+Chaty is powered by gpt-3.5-turbo (latest excellent API provided by openAI).
 
 ## Installation🤖
 
-Supo is a application based on Node.js, and can be installed with the following command:
+Chaty is a application based on Node.js, and can be installed with the following command:
 
 ```
-npm i -g supo
+npm i -g chaty
 ```
 
 ## Services🌍
 
-Supo provides multiple service options, and you can choose the most suitable one according to your needs.
+Chaty provides multiple service options, and you can choose the most suitable one according to your needs.
 ```
 -[x] Private Web Service🚀  
 -[x] NodeJS API Service   
@@ -23,31 +23,31 @@ Supo provides multiple service options, and you can choose the most suitable one
 ### Private Web Service🚀
 
 
-Supo can also provide a private web service, and you can access the Supo service you created anytime by visiting http://localhost:3000.
+Chaty can also provide a private web service, and you can access the Chaty service you created anytime by visiting http://localhost:3000.
 
 ### Telegram Bot Service🤖
 
-Supo can also provide Telegram Bot service, enabling your users to chat with Supo in Telegram. Simply send a message to '@chatgpt_bot' to initiate the chatbot service.
+Chaty can also provide Telegram Bot service, enabling your users to chat with Chaty in Telegram. Simply send a message to '@chatgpt_bot' to initiate the chatbot service.
 
 ### WeChat Robot Service💬
 
 
-Supo can also provide a WeChat robot service, allowing you to chat with Supo through a WeChat public account.
+Chaty can also provide a WeChat robot service, allowing you to chat with Chaty through a WeChat public account.
 
 ## Usage
 
-Supo is easy to integrate into your application, and provides reliable human-machine interaction service. Before using Supo, make sure you have prepared the required packages for Supo and other applications. Then, you can create a Supo instance:
+Chaty is easy to integrate into your application, and provides reliable human-machine interaction service. Before using Chaty, make sure you have prepared the required packages for Chaty and other applications. Then, you can create a Chaty instance:
 
 ```javascript
-supo --web // provide web api
-supo --api // provide js api
-supo --wechat // provide wechat api
-supo --telegram // provide telegram api
+chaty --web // provide web api
+chaty --api // provide js api
+chaty --wechat // provide wechat api
+chaty --telegram // provide telegram api
 ```
 
 Then, you can start interacting with Supo！
 ## Additional Features
 
-In addition to the basic functions mentioned above, Supo also provides some additional features, such as replying to historical messages, and enabling or disabling commands. You can refer to our API documentation for more information.
+In addition to the basic functions mentioned above, Chaty also provides some additional features, such as replying to historical messages, and enabling or disabling commands. You can refer to our API documentation for more information.
 
-Thank you for choosing Supo! If you have any questions or suggestions, please feel free to contact us!
+Thank you for choosing Chaty! If you have any questions or suggestions, please feel free to contact us!

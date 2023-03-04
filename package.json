@@ -1,6 +1,6 @@
 {
-  "name": "supo",
-  "description": "👋 Welcome to the Supo open source project! This is an AI chatbot service that can be installed with 'npm i -g supo', and it aims to provide multiple service options, including private web service, Telegram Bot service, and WeChat robot service.",
+  "name": "chaty",
+  "description": "👋 Welcome to the Chaty open source project! This is an AI chatbot service that can be installed with 'npm i -g chaty', and it aims to provide multiple service options, including private web service, Telegram Bot service, and WeChat robot service.",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -11,14 +11,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cosin2077/supo.git"
+    "url": "git+https://github.com/cosin2077/chaty.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cosin2077/supo/issues"
+    "url": "https://github.com/cosin2077/chaty/issues"
   },
-  "homepage": "https://github.com/cosin2077/supo#readme",
+  "homepage": "https://github.com/cosin2077/chaty#readme",
   "devDependencies": {
     "@types/debug": "^4.1.7",
     "@types/minimist": "^1.2.2",
