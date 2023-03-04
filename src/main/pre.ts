@@ -11,10 +11,12 @@ function ensureHomeDirectory() {
 ensureHomeDirectory();
 if (process.env.OPEN_AI_KEY) {
   // .env in .cwd, copy to appHome
-  const envFile = path.resolve(__dirname, ".env");
+  const envFile = path.resolve(__dirname,'..','..', ".env");
   const destEnvPath = path.resolve(appConfigPath, ".env");
+  console.log(envFile)
   if (fse.existsSync(envFile)) {
     fse.copySync(envFile, destEnvPath, { overwrite: true });
+    debug('copy .env to home dir succeed!')
   }
 } else {
   debug("OPEN_AI_KEY needed!");
