@@ -1,7 +1,13 @@
-👋 Welcome!  
-Chaty is an open source project! which can be installed with 'npm i -g chaty', and it aims to provide multiple service options, including private web service, Telegram Bot service, NodeJS API service, and WeChat robot service.
+## ✨✨✨Chaty is an open source satisfied all your imagination about chatGPT!  
+You can use it as a command-line assistant;  
+You can use it to deploy a private chatGPT service;  
+You can use it to deploy your NodeJS API for chatGPT;  
+You can use it to deploy your wechat chatGPT bot;  
+You can use it to deploy your telegram chatGPT bot;
 
-Chaty is powered by gpt-3.5-turbo (latest excellent API provided by openAI).
+You install it with 'npm i -g chaty', and almost everything gets done!
+
+Chaty is powered by gpt-3.5-turbo (latest powerful API provided by openAI).
 
 ## ⚙️Installation
 
@@ -16,29 +22,31 @@ npm i -g chaty
 Chaty provides multiple service options, and you can choose the most suitable one according to your needs.
 ```
 -[x] Private Web Service🚀  
--[x] NodeJS API Service   
--[x] Telegram Bot Service🤖  
--[x] WeChat Robot Service💬   
+-[x] command line Service🗄️  
+-[] NodeJS API Service 
+-[] Telegram Bot Service🤖  
+-[] WeChat Robot Service💬   
 ```
 ### 🌍Private Web Service
 
 
-Chaty can also provide a private web service, and you can access the Chaty service you created anytime by visiting http://localhost:3000.
+Chaty can deploy a private web service, and you can access the Chaty service you created anytime by visiting http://localhost:5173.
 
 ### 🤖Telegram Bot Service
 
-Chaty can also provide Telegram Bot service, enabling your users to chat with Chaty in Telegram. Simply send a message to '@chatgpt_bot' to initiate the chatbot service.
+Chaty can also deploy Telegram Bot service, enabling your users to chat with Chaty in Telegram. Simply send a message to '@your-bot' to initiate the chatbot service.
 
 ### 💬WeChat Robot Service
 
 
-Chaty can also provide a WeChat robot service, allowing you to chat with Chaty through a WeChat public account.
+Chaty can also deploy a WeChat robot service, allowing you to chat with Chaty through a WeChat account.
 
 ## Usage
 
 Chaty is easy to integrate into your application, and provides reliable human-machine interaction service. Before using Chaty, make sure you have prepared the required packages for Chaty and other applications. Then, you can create a Chaty instance:
 
 ```javascript
+chaty // command-line interaction  
 chaty --web // provide web api
 chaty --api // provide js api
 chaty --wechat // provide wechat api
