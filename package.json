@@ -1,7 +1,7 @@
 {
   "name": "ichaty",
   "description": "Chaty, satisfy all your imagination about chatGPT! deploy your chatGPT web service, api service, wechat bot service etc.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "keywords": [
     "chatGPT",
@@ -13,7 +13,7 @@
   ],
   "bin": {
     "chaty": "./bin/index",
-    "ccc": "./bin/index"
+    "ichaty": "./bin/index"
   },
   "scripts": {
     "build": "tsc && npm run copyWeb",
