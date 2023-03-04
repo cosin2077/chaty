@@ -16,7 +16,7 @@
     "ichaty": "./bin/index.js"
   },
   "scripts": {
-    "build": "tsc && npm run copyWeb",
+    "build": "shx del lib && tsc && npm run copyWeb",
     "copyWeb": "shx mkdir -p ./lib/services/web && shx cp -r ./src/services/web ./lib/services/"
   },
   "files": [
@@ -37,6 +37,7 @@
   "homepage": "https://github.com/cosin2077/chaty#readme",
   "devDependencies": {
     "@types/debug": "^4.1.7",
+    "@types/fs-extra": "^11.0.1",
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.14.5",
     "shx": "^0.3.4",
@@ -47,6 +48,7 @@
     "colors": "^1.4.0",
     "debug": "^4.3.4",
     "dotenv": "^16.0.3",
+    "fs-extra": "^11.1.0",
     "minimist": "^1.2.8",
     "openai": "^3.2.1",
     "pino": "^8.11.0",
