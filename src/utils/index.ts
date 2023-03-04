@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import readline from "readline";
+import child from "child_process";
+import { debug } from "../main/init";
 
 export const confirmReadline = async (question: string, passReg: RegExp) => {
   return new Promise((resolve) => {
@@ -23,22 +25,21 @@ export const asyncSleep = async (number: number) => {
   });
 };
 export const defaultUserAgent = [
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0',
-  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15',
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59',
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36 ',
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0",
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15",
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59",
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36 ",
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0",
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0",
   "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0",
   "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0",
-  "Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/88.0"
-
-]
+  "Mozilla/5.0 (Android 9; Mobile; rv:68.0) Gecko/68.0 Firefox/88.0",
+];
 export const randomUserAgent = () => {
-  return defaultUserAgent[Math.trunc(Math.random() * defaultUserAgent.length)]
-}
+  return defaultUserAgent[Math.trunc(Math.random() * defaultUserAgent.length)];
+};
 export const fetchApi = async (
   apiUrl: string,
   method = "GET",
@@ -66,7 +67,7 @@ export const fetchApi = async (
   const headers = {
     ...type,
     ...defineHeaders,
-    "User-Agent": randomUserAgent()
+    "User-Agent": randomUserAgent(),
   };
   return axios(apiUrl, {
     method,
@@ -76,3 +77,22 @@ export const fetchApi = async (
   }).then((res: AxiosResponse) => res.data);
 };
 
+export const runChildProcess = (
+  name: string,
+  execPath: string,
+  args: string[],
+  options: any
+) => {
+  const childProcess = child.spawn(execPath, args, options);
+  debug(`runChildProcess: ${name}, pid: ${childProcess.pid}`);
+  childProcess.stdout.on("data", (data) => {
+    console.log(data.toString());
+  });
+  childProcess.stderr.on("data", (data) => {
+    console.log(data.toString());
+  });
+  childProcess.on("exit", (code) => {
+    debug(`childProcess.on('exit'): ${name}, data: ${code}`);
+  });
+  return childProcess;
+};

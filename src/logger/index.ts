@@ -6,7 +6,6 @@ import { appLogPath, appName } from "../constants";
 const cwd = process.cwd();
 const { env } = process;
 const logPath = appLogPath;
-console.log(appLogPath);
 
 const logThrough = new stream.PassThrough();
 export const logger = pino({ name: appName }, logThrough);
