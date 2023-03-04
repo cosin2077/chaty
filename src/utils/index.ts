@@ -2,20 +2,21 @@ import axios, { AxiosResponse } from "axios";
 import readline from "readline";
 import child from "child_process";
 import { debug } from "../main/init";
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
-export const confirmReadline = async (question: string, passReg: RegExp) => {
+export const confirmReadline = async (
+  question: string,
+  passReg: RegExp
+): Promise<any> => {
   return new Promise((resolve) => {
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
-
     rl.question(question, (answer: string) => {
       if (passReg.test(answer) || !answer /* enter key */) {
-        return resolve({ confirm: true, answer });
+        return resolve({ confirm: true, answer, close: () => rl.close() });
       }
-      resolve({ confirm: false, answer });
-      rl.close();
+      resolve({ confirm: false, answer, close: () => rl.close() });
     });
   });
 };
