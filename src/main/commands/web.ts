@@ -3,7 +3,7 @@ import path from "path";
 import { parse as dotenvParse } from "dotenv";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { logger } from "../../logger";
-import { runChildProcess } from "../../utils";
+import { runChildProcess, runChildProcessSync } from "../../utils";
 import { chatyDebug } from "../prepare/debug";
 import { projectInstall } from "pkg-install";
 const name = "web-service";
@@ -20,7 +20,8 @@ export async function runWebService() {
   const webDir = await getWebServiceDir();
   await copyEnv(appConfigPath, webDir);
 
-  const args: string[] = ["run", "dev"];
+  const buildArgs: string[] = ["run", "build"];
+  const serveArgs: string[] = ["run", "serve"];
   const options = {
     cwd: webDir,
   };
@@ -28,8 +29,11 @@ export async function runWebService() {
   await projectInstall({
     cwd: webDir,
   });
-  chatyDebug(`string to run web service...`);
-  const child = runChildProcess(name, cmd, args, options);
+  chatyDebug(`string to build for web-service...`);
+  runChildProcessSync(cmd + " " + buildArgs.join(" "), options);
+
+  chatyDebug(`string to run serve for web service...`);
+  const child = runChildProcess(name, cmd, serveArgs, options);
 }
 async function getWebServiceDir() {
   const webPath = path.resolve(

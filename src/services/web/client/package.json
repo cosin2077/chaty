@@ -6,14 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve": "serve dist -p 5174"
   },
   "dependencies": {
     "@types/marked": "^4.0.8",
     "highlight.js": "^11.7.0",
     "marked": "^4.2.12",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "serve": "^14.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
