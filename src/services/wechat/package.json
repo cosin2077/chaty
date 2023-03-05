@@ -1,0 +1,16 @@
+{
+  "name": "chaty-wechat-service",
+  "version": "0.0.1",
+  "description": "chaty wechat bot service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "qrcode-terminal": "^0.12.0",
+    "wechaty": "^1.20.2"
+  }
+}
