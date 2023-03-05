@@ -16,8 +16,9 @@
     "ichaty": "./bin/index.js"
   },
   "scripts": {
-    "build": "shx rm -rf lib && tsc && npm run copyWeb",
-    "copyWeb": "shx mkdir -p ./lib/services/web && shx cp -r ./src/services/web ./lib/services/"
+    "build": "shx rm -rf lib && tsc && npm run copyWeb && npm run copyWechat",
+    "copyWeb": "shx mkdir -p ./lib/services/web && shx cp -r ./src/services/web ./lib/services/",
+    "copyWechat": "shx mkdir -p ./lib/services/wechat && shx cp -r ./src/services/wechat ./lib/services/"
   },
   "files": [
     "lib",

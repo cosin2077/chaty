@@ -5,7 +5,7 @@ import { fetchApi } from "./utils";
 const chatGPTUrl = "https://api.openai.com/v1/chat/completions";
 const chatWithGPT = async (messages: any[]) => {
   const headers = {
-    Authorization: "Bearer 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",
+    Authorization: `Bearer ${process.env.OPEN_AI_KEY}`,
   };
   const answer = await fetchApi(
     chatGPTUrl,

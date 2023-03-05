@@ -2,6 +2,7 @@ import commander from "commander";
 import colors from "colors";
 import pkg from "../../../package.json";
 import { runWebService } from "../commands/web";
+import { runWechatService } from "../commands/wechat";
 import { runCommandLineService } from "../commands/commandLine";
 import { runLogin } from "./login";
 import { setLang } from "../commands/lang";
@@ -42,9 +43,10 @@ To get started, just run "chaty login <openAIKey>" and enter your openAIKey. Onc
         case name && (name.match(/node/im) || {}).input:
           console.log("under construction...");
           process.exit(0);
+          break;
         case name && (name.match(/wechat/im) || {}).input:
-          console.log("under construction...");
-          process.exit(0);
+          runWechatService();
+          break;
         default:
           console.log(colors.red(`[Error]: unknown service ${name}!\n`));
           console.log(
@@ -56,7 +58,9 @@ To get started, just run "chaty login <openAIKey>" and enter your openAIKey. Onc
 
   program
     .command("login [openAIKey]")
-    .description("login with openAIKey. You can find your API key at https://platform.openai.com/account/api-keys.")
+    .description(
+      "login with openAIKey. You can find your API key at https://platform.openai.com/account/api-keys."
+    )
     .action((key, options, command) => {
       chatyDebug("login:", key, options);
       runLogin(key);
