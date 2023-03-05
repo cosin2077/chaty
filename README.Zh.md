@@ -16,9 +16,10 @@ npm i -g chaty
 Chaty 提供多种不同的服务选项，您可根据自己需求选择合适的服务。  
 ```
 -[x] 私有化web服务  
--[x] NodeJS API服务  
--[x] Telegram Bot 服务  
+-[x] 命令行机器人  
 -[x] 微信机器人服务  
+-[] NodeJS API服务  
+-[] Telegram Bot 服务  
 ```
 ### 私有化 web 服务
 

@@ -23,9 +23,9 @@ Chaty provides multiple service options, and you can choose the most suitable on
 ```
 -[x] Private Web Service🚀  
 -[x] command line Service🗄️  
+-[x] WeChat Robot Service💬   
 -[] NodeJS API Service 
 -[] Telegram Bot Service🤖  
--[] WeChat Robot Service💬   
 ```
 ### 🌍Private Web Service
 
