@@ -10,6 +10,7 @@ export const appLogPath = path.resolve(appConfigPath, appConfigLog);
 export const runtimeParams = (() => {
   const obj = {
     CHATY_LANG: "en",
+    ENGINE: 'gpt-3.5-turbo'
   };
   return {
     getVar(prop: keyof typeof obj) {

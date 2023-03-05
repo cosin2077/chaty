@@ -1,5 +1,5 @@
 import { fetchApi } from "./";
-import { debug } from "../main/init";
+import { chatyDebug } from "../main/prepare/debug";
 const chatGPTUrl = "https://api.openai.com/v1/chat/completions";
 const chatWithGPT = async (messages: any[]) => {
   const headers = {
@@ -58,22 +58,22 @@ export async function sendMessage(message: string, user: string) {
   try {
     messageManager.sendMessage(message, user);
     const messages = messageManager.getMessages(user);
-    // debug("-----------newMessages----------");
-    // debug(messages);
-    // debug("-----------newMessages----------");
+    // chatyDebug("-----------newMessages----------");
+    // chatyDebug(messages);
+    // chatyDebug("-----------newMessages----------");
     const completion = await chatWithGPT(messages!);
     const answer = completion.choices[0].message.content;
 
-    // debug("-----------newAnswers----------");
-    // debug(answer);
-    // debug("-----------newAnswers----------");
+    // chatyDebug("-----------newAnswers----------");
+    // chatyDebug(answer);
+    // chatyDebug("-----------newAnswers----------");
     messageManager.concatAnswer(answer, user);
     return answer;
   } catch (err) {
     messageManager.popMessage(user);
-    debug((err as Error).message);
+    chatyDebug((err as Error).message);
     let errorBody = (err as Error & { response: any })?.response?.data;
-    debug(errorBody);
+    chatyDebug(errorBody);
     let append = "[errored]";
     try {
       if (errorBody.error.code === "context_length_exceeded") {

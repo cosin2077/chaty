@@ -1,11 +1,11 @@
 import pino from "pino";
-const childProcess = require("child_process");
-const stream = require("stream");
+import stream from "stream";
+import childProcess from "child_process";
 import { appLogPath, appName } from "../constants";
 
 const cwd = process.cwd();
-const { env } = process;
 const logPath = appLogPath;
+const { env } = process;
 
 const logThrough = new stream.PassThrough();
 export const logger = pino({ name: appName }, logThrough);

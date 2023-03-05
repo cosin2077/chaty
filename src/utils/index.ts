@@ -1,7 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import readline from "readline";
+import os from "os";
+import dotenv from "dotenv";
 import child from "child_process";
-import { debug } from "../main/init";
+import { chatyDebug } from "../main/prepare/debug";
+import { appConfigPath } from "../constants";
+import path from "path";
+import { readFileSync, writeFileSync } from "fs-extra";
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -85,7 +90,7 @@ export const runChildProcess = (
   options: any
 ) => {
   const childProcess = child.spawn(execPath, args, options);
-  debug(`runChildProcess: ${name}, pid: ${childProcess.pid}`);
+  chatyDebug(`runChildProcess: ${name}, pid: ${childProcess.pid}`);
   childProcess.stdout.on("data", (data) => {
     console.log(data.toString());
   });
@@ -93,7 +98,18 @@ export const runChildProcess = (
     console.log(data.toString());
   });
   childProcess.on("exit", (code) => {
-    debug(`childProcess.on('exit'): ${name}, data: ${code}`);
+    chatyDebug(`childProcess.on('exit'): ${name}, data: ${code}`);
   });
   return childProcess;
 };
+export function writeHomeEnv(prop: string, value: string) {
+  const destEnvPath = path.resolve(appConfigPath, ".env");
+  const destKey = dotenv.parse(readFileSync(destEnvPath, "utf-8"));
+  destKey[prop] = value;
+  let newContent = "";
+  for (let line in destKey) {
+    const content = `${os.EOL}${line}=${destKey[line]}${os.EOL}`;
+    newContent += content;
+  }
+  writeFileSync(destEnvPath, newContent, "utf-8");
+}

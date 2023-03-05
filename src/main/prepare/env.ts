@@ -13,5 +13,6 @@ if (
 /**
  * OPEN_AI_KEY
  * CHATY_LANG
+ * ENGINE(MODEL)
  * ...
  */
