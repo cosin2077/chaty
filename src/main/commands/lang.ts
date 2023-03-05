@@ -14,6 +14,10 @@ function formatLang(lang: string) {
   return retLang;
 }
 export const setLang = (lang: string) => {
+  if (!lang) {
+    console.log(colors.red("[Error]: please input your language!\n"));
+    process.exit(1);
+  }
   const destEnvPath = path.resolve(appConfigPath, ".env");
   const formattedLang = formatLang(lang);
   if (!formattedLang) {

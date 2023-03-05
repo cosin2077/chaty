@@ -40,7 +40,7 @@ To get started, just run "chaty login <openAIKey>" and enter your openAIKey. Onc
         case name && (name.match(/command/im) || {}).input:
           runCommandLineService();
           break;
-        case name && (name.match(/node/im) || {}).input:
+        case name && (name.match(/node(js)?|api/im) || {}).input:
           console.log("under construction...");
           process.exit(0);
           break;
@@ -72,7 +72,7 @@ To get started, just run "chaty login <openAIKey>" and enter your openAIKey. Onc
       "set display language, English and Chinese are supported at present"
     )
     .action((key, options, command) => {
-      console.log("lang:", key, options);
+      chatyDebug("lang:", key, options);
       setLang(key);
     });
 
