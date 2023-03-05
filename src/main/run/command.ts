@@ -2,6 +2,7 @@ import { confirmReadline } from "../../utils";
 import { resetMessage, sendMessage } from "../../utils/gptTurboApi";
 
 export const runCommandLineService = async () => {
+  console.log("runCommandLineService...");
   let stop = false;
   const user = "user";
   while (!stop) {
@@ -15,7 +16,12 @@ export const runCommandLineService = async () => {
     }
     if (/exit|quit|退出/gim.test(answer)) {
       stop = true;
-      close()
+      close();
+      console.log("quitting now...");
+      setTimeout(() => {
+        process.exit(0);
+      }, 200);
+
       break;
     }
     if (/reset|重置/gim.test(answer)) {
@@ -26,5 +32,4 @@ export const runCommandLineService = async () => {
     const res = await sendMessage(answer!, user);
     console.log("\x1b[33m%s\x1b[0m", res);
   }
-  console.log('结束了')
 };

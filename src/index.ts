@@ -1,5 +1,4 @@
-import './main/pre'
-import './main/check'
-import './main/init'
-import { runService } from './main/run'
-runService()
+import "./main/prepare/index";
+import "./main/init";
+import { registerCommand } from "./main/prepare/command";
+registerCommand();
