@@ -19,6 +19,8 @@ const child = childProcess.spawn(
     `${logPath}/error.log`,
     "fatal",
     `${logPath}/fatal.log`,
+    "info",
+    `${logPath}/info.log`,
   ],
   { cwd, env, stdio: ["pipe", "inherit", "inherit"] }
 );

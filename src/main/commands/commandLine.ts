@@ -1,5 +1,5 @@
 import { confirmReadline } from "../../utils";
-import { resetMessage, sendMessage } from "../../utils/gptTurboApi";
+import { resetMessage, sendMessage } from "../../utils/useChatAPI";
 
 export const runCommandLineService = async () => {
   console.log("run command-line bot service...");

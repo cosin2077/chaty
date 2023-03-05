@@ -16,7 +16,6 @@ export const runLogin = (key: string | undefined) => {
   const currentEnvPath = path.resolve(process.cwd(), ".env");
   let keyInCurrent: dotenv.DotenvParseOutput;
   chatyDebug(destEnvPath, currentEnvPath);
-  logger.info(destEnvPath, currentEnvPath);
   if (existsSync(currentEnvPath)) {
     keyInCurrent = dotenv.parse(readFileSync(currentEnvPath, "utf-8"));
   }

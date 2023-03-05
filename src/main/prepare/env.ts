@@ -14,5 +14,6 @@ if (
  * OPEN_AI_KEY
  * CHATY_LANG
  * ENGINE(MODEL)
+ * LAST_VERSION_CHECK_TIME
  * ...
  */
