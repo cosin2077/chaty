@@ -1,17 +1,14 @@
-import dotenv from "dotenv";
 import colors from "colors";
 import fse, { appendFileSync } from "fs-extra";
 import path from "path";
 import os from "os";
-dotenv.config();
-import { appConfigPath, appLogPath } from "../../constants/index";
+import { appConfigPath, appLogPath, supportLangList } from "../../constants/index";
 
 function ensureHomeDirectory() {
   fse.ensureDirSync(appLogPath);
 }
 ensureHomeDirectory();
 
-const supportLangList = ["en", "zh"];
 function formatLang(lang: string) {
   let retLang = "";
   for (let sl of supportLangList) {
@@ -29,7 +26,7 @@ export const setLang = (lang: string) => {
     console.log(colors.green(`Only support ${supportLangList.join(",")}`));
     process.exit(1);
   }
-  const content = `${os.EOL}LANG=${formattedLang}${os.EOL}`;
+  const content = `${os.EOL}CHATY_LANG=${formattedLang}${os.EOL}`;
   appendFileSync(destEnvPath, content, "utf-8");
   console.log(colors.green("set language succeed!\n"));
   process.exit(0);

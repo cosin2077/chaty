@@ -1,9 +1,7 @@
-import dotenv from "dotenv";
 import colors from "colors";
 import fse, { appendFileSync } from "fs-extra";
 import path from "path";
 import os from "os";
-dotenv.config();
 import { debug } from "../init";
 import { appConfigPath } from "../../constants/index";
 
