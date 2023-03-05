@@ -49,7 +49,6 @@ export const fetchApi = async (
   const headers = {
     ...type,
     ...defineHeaders,
-    "User-Agent": randomUserAgent(),
   };
   return axios(apiUrl, {
     method,

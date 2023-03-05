@@ -6,7 +6,7 @@ import child from "child_process";
 import { chatyDebug } from "../main/prepare/debug";
 import { appConfigPath } from "../constants";
 import path from "path";
-import { readFileSync, writeFileSync } from "fs-extra";
+import { ensureFileSync, readFileSync, writeFileSync } from "fs-extra";
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -104,6 +104,7 @@ export const runChildProcess = (
 };
 export function writeHomeEnv(prop: string, value: string) {
   const destEnvPath = path.resolve(appConfigPath, ".env");
+  ensureFileSync(destEnvPath)
   const destKey = dotenv.parse(readFileSync(destEnvPath, "utf-8"));
   destKey[prop] = value;
   let newContent = "";

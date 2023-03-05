@@ -1,14 +1,26 @@
-.history p {
+.history div {
   line-height: 36px;
   font-size: 24px;
+  padding: 15px;
 }
 
-.history p .avatar {
+.history div .avatar {
   margin-right: 20px;
   font-size: 40px;
 }
 
-.history .assistant-history {
+.history .assistant-history .content {
   background-color: rgba(211, 211, 211, 0.252);
-  border-radius: 5px;;
+  border-radius: 5px;
+  flex-grow: 1;
+  overflow: auto;
+}
+.history .assistant-history,
+.user-history {
+  display: flex;
+  flex-direction: row;
+}
+div.assistant-history,
+div.user-history {
+  padding-left: 0px;
 }

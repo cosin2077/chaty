@@ -1,6 +1,7 @@
+import { appConfigPath } from "./../../constants/index";
+import path from "path";
 import { parse as dotenvParse } from "dotenv";
 import { existsSync, readFileSync, writeFileSync } from "fs";
-import path from "path";
 import { logger } from "../../logger";
 import { runChildProcess } from "../../utils";
 import { chatyDebug } from "../prepare/debug";
@@ -16,9 +17,8 @@ if (/win32|win64/.test(process.platform)) {
 export async function runWebService() {
   console.log("runWebService...");
 
-  const projectDir = await getProjectDir();
   const webDir = await getWebServiceDir();
-  await copyEnv(projectDir, webDir);
+  await copyEnv(appConfigPath, webDir);
 
   const args: string[] = ["run", "dev"];
   const options = {
@@ -42,19 +42,15 @@ async function getWebServiceDir() {
   );
   return webPath;
 }
-async function getProjectDir() {
-  const projectPath = path.resolve(__dirname, "..", "..", "..");
-  return projectPath;
-}
 const exposeEnv = ["OPEN_AI_KEY"];
 async function copyEnv(from: string, to: string) {
   const fromEnv = path.resolve(from, ".env");
   const toEnv = path.resolve(to, ".env");
   const checkFrom = await existsSync(fromEnv);
-
+  chatyDebug(`copy from ${fromEnv} to ${toEnv}`);
   if (!checkFrom) {
-    chatyDebug(`error: .env not exists!`);
-    logger.fatal(`error: .env not exists!${fromEnv}`);
+    chatyDebug(`[Error]: cannot find .env file in ${from}!`);
+    logger.fatal(` .env not exists!${fromEnv}`);
     return;
   }
   const content = readFileSync(fromEnv, "utf-8");
@@ -66,5 +62,4 @@ async function copyEnv(from: string, to: string) {
     }
   }
   writeFileSync(toEnv, newContent, "utf-8");
-  chatyDebug(`copy .env file to ${toEnv} succeed!`);
 }

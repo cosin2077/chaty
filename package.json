@@ -16,7 +16,7 @@
     "ichaty": "./bin/index.js"
   },
   "scripts": {
-    "build": "shx del lib && tsc && npm run copyWeb",
+    "build": "shx rm -rf lib && tsc && npm run copyWeb",
     "copyWeb": "shx mkdir -p ./lib/services/web && shx cp -r ./src/services/web ./lib/services/"
   },
   "files": [

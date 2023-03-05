@@ -1,4 +1,6 @@
 import "./index.css";
+import { marked } from "marked";
+import highlight from "highlight.js";
 type HistoryType = {
   history: any[];
 };
@@ -10,18 +12,23 @@ function History({ history }: HistoryType) {
           let html;
           if (history?.role === "user") {
             html = (
-              <p key={index + history?.role} className="user-history">
-                <span className="avatar">🧑‍🦲</span>
+              <div key={index + history?.role} className="user-history">
+                <span className="avatar">🤔</span>
                 <span className="content">{history?.content}</span>
-              </p>
+              </div>
             );
           }
           if (history?.role === "assistant") {
             html = (
-              <p key={index + history?.role} className="assistant-history">
+              <div key={index + history?.role} className="assistant-history">
                 <span className="avatar">🤖</span>
-                <span className="content">{history?.content}</span>
-              </p>
+                <div
+                  className="content"
+                  dangerouslySetInnerHTML={{
+                    __html: marked.parse(history?.content),
+                  }}
+                ></div>
+              </div>
             );
           }
           return html;
