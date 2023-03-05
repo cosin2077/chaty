@@ -1,6 +1,21 @@
 import "./index.css";
 import { marked } from "marked";
-import highlight from "highlight.js";
+import hljs from "highlight.js";
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  highlight: function (code, lang) {
+    const language = hljs.getLanguage(lang) ? lang : "plaintext";
+    return hljs.highlight(code, { language }).value;
+  },
+  langPrefix: "hljs language-",
+  pedantic: false,
+  gfm: true,
+  breaks: false,
+  sanitize: false,
+  smartypants: false,
+  xhtml: false,
+});
+
 type HistoryType = {
   history: any[];
 };
