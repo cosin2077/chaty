@@ -102,9 +102,17 @@ export const runChildProcess = (
   });
   return childProcess;
 };
+export const runChildProcessSync = (execStr: string, options: any) => {
+  try {
+    const res = child.execSync(execStr, options);
+    chatyDebug(res.toString());
+  } catch (err) {
+    console.log(err);
+  }
+};
 export function writeHomeEnv(prop: string, value: string) {
   const destEnvPath = path.resolve(appConfigPath, ".env");
-  ensureFileSync(destEnvPath)
+  ensureFileSync(destEnvPath);
   const destKey = dotenv.parse(readFileSync(destEnvPath, "utf-8"));
   destKey[prop] = value;
   let newContent = "";

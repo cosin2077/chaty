@@ -3,15 +3,15 @@ import path from "path";
 import { parse as dotenvParse } from "dotenv";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { logger } from "../../logger";
-import { runChildProcess } from "../../utils";
+import { runChildProcess, runChildProcessSync } from "../../utils";
 import { chatyDebug } from "../prepare/debug";
 import { projectInstall } from "pkg-install";
 const name = "web-service";
-let cmd = "node";
+let cmd = "npm";
 if (/win32|win64/.test(process.platform)) {
-  cmd = "node.cmd";
+  cmd = "npm.cmd";
 } else {
-  cmd = "node";
+  cmd = "npm";
 }
 
 export async function runWechatService() {
@@ -20,7 +20,8 @@ export async function runWechatService() {
   const webDir = await getWechatServiceDir();
   await copyEnv(appConfigPath, webDir);
 
-  const args: string[] = ["index"];
+  const startArgs: string[] = ["run", "start"];
+  const buildArgs: string[] = ["run", "build"];
   const options = {
     cwd: webDir,
   };
@@ -28,19 +29,14 @@ export async function runWechatService() {
   await projectInstall({
     cwd: webDir,
   });
+  chatyDebug(`string build pkgs for wechat service...`);
+  await runChildProcessSync(cmd + " " + buildArgs.join(" "), options);
+
   chatyDebug(`string to run wechat service...`);
-  const child = runChildProcess(name, cmd, args, options);
+  const startChild = runChildProcess(name, cmd, startArgs, options);
 }
 async function getWechatServiceDir() {
-  const webPath = path.resolve(
-    __dirname,
-    "..",
-    "..",
-    '..',
-    'lib',
-    "services",
-    "wechat",
-  );
+  const webPath = path.resolve(__dirname, "..", "..", "services", "wechat");
   return webPath;
 }
 const exposeEnv = ["OPEN_AI_KEY"];

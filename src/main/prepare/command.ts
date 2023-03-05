@@ -76,16 +76,13 @@ To get started, just run "chaty login <openAIKey>" and enter your openAIKey. Onc
       setLang(key);
     });
 
-  // 开启debug模式
   program.on("option:debug", () => {
     if (program.opts().debug) {
       process.env.LOG_LEVEL = "verbose";
     } else {
       process.env.LOG_LEVEL = "info";
     }
-    console.log(program.opts());
   });
-  // 未知命令的监听
   program.on("command:*", (obj) => {
     const availableCommands = program.commands.map((command) => command.name());
     if (!availableCommands.includes(obj[0])) {

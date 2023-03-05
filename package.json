@@ -17,8 +17,8 @@
   },
   "scripts": {
     "build": "shx rm -rf lib && tsc && npm run copyWeb && npm run copyWechat",
-    "copyWeb": "shx mkdir -p ./lib/services/web && shx cp -r ./src/services/web ./lib/services/",
-    "copyWechat": "shx mkdir -p ./lib/services/wechat && shx cp -r ./src/services/wechat ./lib/services/"
+    "copyWeb": "shx mkdir -p ./lib/src/services/web && shx cp -r ./src/services/web ./lib/src/services/web",
+    "copyWechat": "shx mkdir -p ./lib/src/services/wechat && shx cp -r ./src/services/wechat ./lib/src/services/wechat"
   },
   "files": [
     "lib",
