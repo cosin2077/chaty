@@ -1,7 +1,7 @@
 {
   "name": "ichaty",
   "description": "Chaty, satisfy all your imagination about chatGPT! deploy your chatGPT web service, api service, wechat bot service etc.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "index.js",
   "keywords": [
     "chatGPT",
