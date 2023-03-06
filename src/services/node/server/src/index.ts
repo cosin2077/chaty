@@ -76,7 +76,14 @@ const listen = () => {
     console.log(`api is running at: http://127.0.0.1:${PORT}`);
   });
   server.on('error', (err) => {
-    console.log(err)
+    if ((err as any).code === "EADDRINUSE") {
+      console.log(`PORT: ${PORT} is in use. try another...`)
+      PORT = PORT! + 1
+      server.close();
+      setTimeout(listen, 200)
+  } else {
+      console.log(err)
+  }
   })
 }
 listen();

@@ -3,6 +3,7 @@ import colors from 'colors'
 import pkg from '../../../package.json'
 import { runWebService } from '../commands/web'
 import { runWechatService } from '../commands/wechat'
+import { runNodeService } from '../commands/node'
 import { runCommandLineService } from '../commands/commandLine'
 import { runLogin } from './login'
 import { setLang } from '../commands/lang'
@@ -42,7 +43,7 @@ To get started, just run "chaty login <openAIKey>" and enter your openAIKey. Onc
           break
         case name?.match(/node(js)?|api/im)?.input:
           console.log('under construction...')
-          process.exit(0)
+          await runNodeService()
           break
         case name?.match(/wechat/im)?.input:
           await runWechatService()
