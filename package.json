@@ -17,7 +17,7 @@
   },
   "scripts": {
     "devBuild": "shx rm -rf lib && tsc",
-    "build": "shx rm -rf lib && tsc --sourceMap=false && npm run copyWeb && npm run copyWechat && npm run cleanEnv",
+    "build": "shx rm -rf lib && tsc --sourceMap false && npm run copyWeb && npm run copyWechat && npm run cleanEnv",
     "copyWeb": "shx mkdir -p ./lib/src/services/web && shx cp -r ./src/services/web ./lib/src/services/",
     "copyWechat": "shx mkdir -p ./lib/src/services/wechat && shx cp -r ./src/services/wechat ./lib/src/services/",
     "prepublish": "npm run cleanEnv",
