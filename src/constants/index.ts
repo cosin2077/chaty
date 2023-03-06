@@ -7,6 +7,12 @@ export const appConfigLog = 'logs'
 export const appConfigPath = path.resolve(os.homedir(), appConfigDirName)
 export const appLogPath = path.resolve(appConfigPath, appConfigLog)
 
+function getProperty<T, K extends keyof T> (obj: T, key: K): T[K] {
+  return obj[key]
+}
+function setProperty<T, K extends keyof T> (obj: T, key: K, value: T[K]): void {
+  obj[key] = value
+}
 export const runtimeParams = (() => {
   const obj = {
     CHATY_LANG: 'en',
@@ -14,10 +20,10 @@ export const runtimeParams = (() => {
   }
   return {
     getVar (prop: keyof typeof obj) {
-      return obj[prop]
+      return getProperty(obj, prop)
     },
-    setVar (prop: keyof typeof obj, value: any) {
-      obj[prop] = value
+    setVar (prop: keyof typeof obj, value: string) {
+      setProperty(obj, prop, value)
     }
   }
 })()

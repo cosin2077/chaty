@@ -6,17 +6,18 @@ import { writeHomeEnv } from '../../utils'
 dotenv.config({ path: path.resolve(appConfigPath, '.env') })
 
 const { CHATY_LANG, WEB_PORT, NODE_PORT } = process.env
+console.log(NODE_PORT)
 if (!WEB_PORT) {
   writeHomeEnv('WEB_PORT', '9522')
 }
 if (!NODE_PORT) {
-  writeHomeEnv('WEB_PORT', '9523')
+  writeHomeEnv('NODE_PORT', '9523')
 }
 if (
   (CHATY_LANG !== undefined && CHATY_LANG !== null && CHATY_LANG !== '') &&
   supportLangList.includes(CHATY_LANG)
 ) {
-  runtimeParams.setVar('CHATY_LANG', process.env.CHATY_LANG)
+  runtimeParams.setVar('CHATY_LANG', CHATY_LANG)
 }
 /**
  * OPEN_AI_KEY
