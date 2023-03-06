@@ -6,6 +6,7 @@ import child from 'child_process'
 import { chatyDebug } from '../main/prepare/debug'
 import { appConfigPath } from '../constants'
 import path from 'path'
+import cliSpinner from 'cli-spinner'
 import { ensureFileSync, readFileSync, writeFileSync } from 'fs-extra'
 const rl = readline.createInterface({
   input: process.stdin,
@@ -117,4 +118,12 @@ export const writeHomeEnv = function (prop: string, value: string) {
     newContent += content
   }
   writeFileSync(destEnvPath, newContent, 'utf-8')
+}
+
+export function spinnerStart (loadingMsg = 'loading', spinnerString = '|/-\\') {
+  const { Spinner } = cliSpinner
+  const spinner = new Spinner(`${loadingMsg}.. %s`)
+  spinner.setSpinnerString(spinnerString)
+  spinner.start()
+  return spinner
 }

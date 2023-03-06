@@ -47,7 +47,7 @@ function Interaction({ history, setHistory }: InteractionType) {
       let historyAfter = [...latestHistory.current!];
       historyAfter.push({
         role: "assistant",
-        content: res,
+        content: res?.data || res,
       });
       setHistory(historyAfter);
     } catch (err) {

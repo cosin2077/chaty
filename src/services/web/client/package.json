@@ -2,22 +2,29 @@
   "name": "chaty-web-service",
   "private": true,
   "version": "0.0.1",
-  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && npm run build:server",
+    "build:server": "tsc --project tsconfig.server.json",
     "preview": "vite preview",
-    "serve": "serve dist -p 5174"
+    "start": "node dist/server/index.js"
   },
   "dependencies": {
+    "@koa/cors": "^4.0.0",
     "@types/marked": "^4.0.8",
     "highlight.js": "^11.7.0",
+    "koa": "^2.14.1",
+    "koa-body": "^6.0.1",
+    "koa-router": "^12.0.0",
+    "koa-static": "^5.0.0",
     "marked": "^4.2.12",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "serve": "^14.2.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/koa__cors": "^3.3.1",
+    "@types/koa-router": "^7.4.4",
+    "@types/koa-static": "^4.0.2",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react-swc": "^3.0.0",

@@ -25,7 +25,7 @@ async function getWebServiceDir () {
   return webPath
 }
 
-const exposeEnv = ['OPEN_AI_KEY']
+const exposeEnv = ['OPEN_AI_KEY', 'WEB_PORT']
 async function copyEnv (from: string, to: string) {
   const fromEnv = path.resolve(from, '.env')
   const toEnv = path.resolve(to, '.env')
