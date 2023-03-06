@@ -4,7 +4,7 @@ const router = new Router();
 
 
 router.get('/', async (ctx, next) => {
-  ctx.body = `post http://127.0.0.1:${process.env.WEB_PORT}/chat/message to interact with chatGPT api!`;
+  ctx.body = `post http://127.0.0.1:${process.env.NODE_PORT}/chat/message to interact with chatGPT api!`;
 });
 router.post('/chat/message', async (ctx, next) => {
   const bodyStr = ctx.request.body;

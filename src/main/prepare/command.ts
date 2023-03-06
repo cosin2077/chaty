@@ -42,7 +42,6 @@ To get started, just run "chaty login <openAIKey>" and enter your openAIKey. Onc
           await runCommandLineService()
           break
         case name?.match(/node(js)?|api/im)?.input:
-          console.log('under construction...')
           await runNodeService()
           break
         case name?.match(/wechat/im)?.input:

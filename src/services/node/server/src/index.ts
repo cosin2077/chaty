@@ -17,14 +17,14 @@ app.use(koaBody());
 app.use(router.routes()).use(router.allowedMethods());
 
 const listen = () => {
-  const { WEB_PORT } = process.env
-  const server = app.listen(WEB_PORT, () => {
-    console.log(`api is running at: http://127.0.0.1:${WEB_PORT}`);
+  const { NODE_PORT } = process.env
+  const server = app.listen(NODE_PORT, () => {
+    console.log(`api is running at: http://127.0.0.1:${NODE_PORT}`);
   });
   server.on('error', (err) => {
     if ((err as any).code === "EADDRINUSE") {
-      console.log(`WEB_PORT: ${WEB_PORT} is in use. try another...`)
-      process.env.WEB_PORT = Number(WEB_PORT!) + 1 + ''
+      console.log(`NODE_PORT: ${NODE_PORT} is in use. try another...`)
+      process.env.NODE_PORT = Number(NODE_PORT!) + 1 + ''
       server.close();
       setTimeout(listen, 200)
   } else {

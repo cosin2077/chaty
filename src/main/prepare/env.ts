@@ -6,7 +6,6 @@ import { writeHomeEnv } from '../../utils'
 dotenv.config({ path: path.resolve(appConfigPath, '.env') })
 
 const { CHATY_LANG, WEB_PORT, NODE_PORT } = process.env
-console.log(NODE_PORT)
 if (!WEB_PORT) {
   writeHomeEnv('WEB_PORT', '9522')
 }
