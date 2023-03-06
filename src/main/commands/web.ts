@@ -41,7 +41,7 @@ async function copyEnv (from: string, to: string) {
   let newContent = ''
   for (const prop in parsed) {
     if (exposeEnv.includes(prop)) {
-      newContent += `VITE_${prop}=${parsed[prop]}\n`
+      newContent += `${prop}=${parsed[prop]}\n`
     }
   }
   writeFileSync(toEnv, newContent, 'utf-8')
@@ -54,7 +54,7 @@ export async function runWebService () {
   await copyEnv(appConfigPath, webDir)
 
   const buildArgs: string[] = ['run', 'build']
-  const serveArgs: string[] = ['run', 'serve']
+  const startArgs: string[] = ['run', 'start']
   const options = {
     cwd: webDir
   }
@@ -65,6 +65,6 @@ export async function runWebService () {
   chatyDebug('string to build for web-service...')
   runChildProcessSync(`${cmd} ${buildArgs.join(' ')}`, options)
 
-  chatyDebug('string to run serve for web service...')
-  runChildProcess(name, cmd, serveArgs, options)
+  chatyDebug('string to run start for web service...')
+  runChildProcess(name, cmd, startArgs, options)
 }

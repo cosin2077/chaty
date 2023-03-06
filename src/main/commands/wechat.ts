@@ -33,7 +33,7 @@ async function copyEnv (from: string, to: string) {
   let newContent = ''
   for (const prop in parsed) {
     if (exposeEnv.includes(prop)) {
-      newContent += `VITE_${prop}=${parsed[prop]}\n`
+      newContent += `${prop}=${parsed[prop]}\n`
     }
   }
   writeFileSync(toEnv, newContent, 'utf-8')

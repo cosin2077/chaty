@@ -1,7 +1,5 @@
 import { chatWithGPT, messageManager } from "../utils";
 
-console.log(process.env.VITE_OPEN_AI_KEY);
-
 export async function resetMessage(user: string) {
   messageManager.clearMessage(user);
 }

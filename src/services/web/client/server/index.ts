@@ -20,8 +20,6 @@ app.use(koaBody());
 app.use(serve(path.resolve(__dirname, '..', 'client')));
 
 router.get('/', async (ctx, next) => {
-  const body = ctx.request.body;
-  console.log(body)
   ctx.body = 'ok';
 });
 router.post('/chat/message', async (ctx, next) => {

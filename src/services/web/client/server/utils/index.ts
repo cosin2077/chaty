@@ -60,7 +60,7 @@ export const fetchApi = async (
 
 export const chatWithGPT = async (messages: any[]) => {
   const headers = {
-    Authorization: `Bearer ${process.env.VITE_OPEN_AI_KEY}`,
+    Authorization: `Bearer ${process.env.OPEN_AI_KEY}`,
   };
   const answer = await fetchApi(
     openAIChatAPI,
@@ -104,7 +104,6 @@ export const messageManager = (() => {
     },
     clearMessage: (user: string) => {
       messageMap.delete(user);
-      console.log(messageMap);
     },
   };
 })();
