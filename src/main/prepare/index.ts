@@ -1,3 +1,3 @@
-import "./dir";
-import "./env";
-import "./debug";
+import './dir'
+import './env'
+import './debug'

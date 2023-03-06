@@ -1,3 +1,3 @@
-export * from "./commandLine";
-export * from "./lang";
-export * from "./web";
+export * from './commandLine'
+export * from './lang'
+export * from './web'

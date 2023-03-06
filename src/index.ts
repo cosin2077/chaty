@@ -1,2 +1,2 @@
-import "./main/prepare/index";
-import "./main/init";
+import './main/prepare/index'
+import './main/init'

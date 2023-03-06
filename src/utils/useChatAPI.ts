@@ -1,86 +1,80 @@
-import { fetchApi } from ".";
-import { chatyDebug } from "../main/prepare/debug";
-const chatGPTUrl = "https://api.openai.com/v1/chat/completions";
+import { fetchApi } from '.'
+import { chatyDebug } from '../main/prepare/debug'
+const chatGPTUrl = 'https://api.openai.com/v1/chat/completions'
 const chatWithGPT = async (messages: any[]) => {
   const headers = {
-    Authorization: `Bearer ${process.env.OPEN_AI_KEY}`,
-  };
+    Authorization: `Bearer ${process.env.OPEN_AI_KEY!}`
+  }
   const answer = await fetchApi(
     chatGPTUrl,
-    "POST",
+    'POST',
     { headers },
     {
-      model: "gpt-3.5-turbo",
-      messages,
+      model: 'gpt-3.5-turbo',
+      messages
     }
-  );
-  return answer;
-};
+  )
+  return answer
+}
 
 const messageManager = (() => {
-  let messageMap: Map<any, any[]> = new Map();
+  const messageMap = new Map<any, any[]>()
   return {
     sendMessage: (content: string, user: string) => {
       if (!messageMap.get(user)) {
-        messageMap.set(user, []);
+        messageMap.set(user, [])
       }
-      const data = messageMap.get(user);
-      data?.push({ role: "user", content });
+      const data = messageMap.get(user)
+      data?.push({ role: 'user', content })
     },
     concatAnswer: (content: string, user: string) => {
       if (!messageMap.get(user)) {
-        messageMap.set(user, []);
+        messageMap.set(user, [])
       }
-      const data = messageMap.get(user);
-      data?.push({ role: "assistant", content });
+      const data = messageMap.get(user)
+      data?.push({ role: 'assistant', content })
     },
-    getMessages: (user: string) => {
-      return messageMap.get(user);
-    },
+    getMessages: (user: string) => messageMap.get(user),
     shiftMessage: (user: string) => {
-      const data = messageMap.get(user);
-      data?.shift();
+      const data = messageMap.get(user)
+      data?.shift()
     },
     popMessage: (user: string) => {
-      const data = messageMap.get(user);
-      data?.pop();
+      const data = messageMap.get(user)
+      data?.pop()
     },
     clearMessage: (user: string) => {
-      messageMap.delete(user);
-    },
-  };
-})();
+      messageMap.delete(user)
+    }
+  }
+})()
 
-export async function resetMessage(user: string) {
-  messageManager.clearMessage(user);
+export async function resetMessage (user: string) {
+  messageManager.clearMessage(user)
 }
-export async function sendMessage(message: string, user: string) {
+export async function sendMessage (message: string, user: string) {
   try {
-    messageManager.sendMessage(message, user);
-    const messages = messageManager.getMessages(user);
+    messageManager.sendMessage(message, user)
+    const messages = messageManager.getMessages(user)
     // chatyDebug("-----------newMessages----------");
     // chatyDebug(messages);
     // chatyDebug("-----------newMessages----------");
-    const completion = await chatWithGPT(messages!);
-    const answer = completion.choices[0].message.content;
+    const completion = await chatWithGPT(messages!)
+    const answer = completion.choices[0].message.content
 
     // chatyDebug("-----------newAnswers----------");
     // chatyDebug(answer);
     // chatyDebug("-----------newAnswers----------");
-    messageManager.concatAnswer(answer, user);
-    return answer;
+    messageManager.concatAnswer(answer, user)
+    return answer
   } catch (err) {
-    messageManager.popMessage(user);
-    chatyDebug((err as Error).message);
-    let errorBody = (err as Error & { response: any })?.response?.data;
-    chatyDebug(errorBody);
-    let append = "[errored]";
+    messageManager.popMessage(user)
+    chatyDebug((err as Error).message)
+    let errorBody = (err as Error & { response: any })?.response?.data
+    chatyDebug(errorBody)
     try {
-      if (errorBody.error.code === "context_length_exceeded") {
-        append = "[errored][context_length_exceeded]";
-      }
-      errorBody = JSON.stringify(errorBody);
+      errorBody = JSON.stringify(errorBody)
     } catch (_) {}
-    return (err as Error).message + "   " + errorBody + "[errored]";
+    return `${(err as Error).message}` || `${errorBody as string}`
   }
 }

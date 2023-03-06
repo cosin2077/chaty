@@ -44,6 +44,13 @@
     "@types/fs-extra": "^11.0.1",
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.14.5",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "^8.35.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
     "shx": "^0.3.4",
     "typescript": "^4.9.5"
   },

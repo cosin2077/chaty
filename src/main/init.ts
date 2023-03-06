@@ -1,2 +1,2 @@
-import { registerCommand } from "./prepare/command";
-registerCommand();
+import { registerCommand } from './prepare/command'
+registerCommand()
