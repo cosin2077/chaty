@@ -3,7 +3,7 @@ import path from 'path'
 import { parse as dotenvParse } from 'dotenv'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { logger } from '../../logger'
-import { runChildProcess, runChildProcessSync } from '../../utils'
+import { runChildPromise } from '../../utils'
 import { chatyDebug } from '../prepare/debug'
 import { projectInstall } from 'pkg-install'
 const name = 'web-service'
@@ -50,13 +50,13 @@ export async function runWechatService () {
   const options = {
     cwd: webDir
   }
-  chatyDebug('string to install pkgs for wechat service...')
+  chatyDebug('starting to install pkgs for wechat service...')
   await projectInstall({
     cwd: webDir
   })
-  chatyDebug('string build pkgs for wechat service...')
-  runChildProcessSync(`${cmd} ${buildArgs.join(' ')}`, options)
+  chatyDebug('starting build pkgs for wechat service...')
+  await runChildPromise(name, cmd, buildArgs, options)
 
-  chatyDebug('string to run wechat service...')
-  runChildProcess(name, cmd, startArgs, options)
+  chatyDebug('starting to run wechat service...')
+  await runChildPromise(name, cmd, startArgs, options)
 }
