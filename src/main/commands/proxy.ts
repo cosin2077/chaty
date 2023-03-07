@@ -1,11 +1,9 @@
-import { chatyDebug } from './../prepare/debug';
+import { chatyDebug } from './../prepare/debug'
 import colors from 'colors'
-import { appendFileSync } from 'fs-extra'
 import path from 'path'
 import os from 'os'
-import { appConfigPath, supportLangList } from '../../constants/index'
-import { writeHomeEnv } from '../../utils';
-
+import { appConfigPath } from '../../constants/index'
+import { writeHomeEnv } from '../../utils'
 
 export const setProxy = (proxyUrl: string) => {
   if (!proxyUrl) {
