@@ -20,6 +20,7 @@
 }
 .send,
 .clear {
+  outline: none;
   height: 60px;
   margin: 5px;
   background-color: #000000;
@@ -28,9 +29,9 @@
   text-align: center;
   transition: background-color 0.1s linear;
 }
-.send:hover, .clear:hover{
+/* .send:hover, .clear:hover{
   background-color: rgba(0,0,0,0.6);
-}
+} */
 .send:active, .clear:active{
   background-color: rgba(0,0,0,0.85);
 }
@@ -38,15 +39,20 @@
   background-color: rgba(54, 41, 41, 0.85);
   cursor: not-allowed;
 }
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 600px) {
   .input {
+    margin-top:10px;
     width: calc(100% - 20px);
+    height: 30px;
     display: block;
+    font-size: 16px;
   }
   .send,
   .clear {
-    height: 50px;
+    height: 40px;
+    line-height: 40px;
     margin: 5px;
+    padding: 0px 20px;
     margin-top: 20px;
     background-color: #000000;
     color: white;

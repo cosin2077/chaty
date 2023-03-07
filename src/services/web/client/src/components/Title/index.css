@@ -11,3 +11,9 @@
   --un-gradient: var(--un-gradient-shape), var(--un-gradient-stops);
   background-image: linear-gradient(var(--un-gradient));
 }
+@media screen and (max-width: 600px) {
+  .title-text{
+    margin-bottom: 40px;
+  }
+}
+
