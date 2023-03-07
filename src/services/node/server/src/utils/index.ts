@@ -59,11 +59,20 @@ export const fetchApi = async (
 };
 
 export const chatWithGPT = async (messages: any[]) => {
-  const headers = {
+  const headers: Record<string, any> = {
     Authorization: `Bearer ${process.env.OPEN_AI_KEY}`,
   };
+  let apiUrl = openAIChatAPI
+  let { CHATY_PROXY } = process.env
+  if (CHATY_PROXY) {
+    if (CHATY_PROXY[CHATY_PROXY.length - 1] !== '/') {
+      CHATY_PROXY += '/'
+    }
+    headers.origin = 'https://app.uniswap.org'
+    apiUrl = CHATY_PROXY + openAIChatAPI
+  }
   const answer = await fetchApi(
-    openAIChatAPI,
+    apiUrl,
     "POST",
     { headers },
     {

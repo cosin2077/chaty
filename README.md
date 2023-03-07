@@ -89,7 +89,13 @@ Just send message with hello/你好 to start your journey~
 
 Chaty can also deploy Telegram Bot service, enabling your users to chat with Chaty in Telegram. Simply send a message to '@your-bot' to initiate the chatbot service.
 
-
+## Troubleshooting  
+If your network cannot access api.openai.com, you can try run  
+```
+chaty proxy default
+```
+as a temporary proxy solution.  
+For a long-term solution, it is recommended to run on a server that supports accessing api.openai.com or use a stable proxy.
 
 ## Additional Features
 

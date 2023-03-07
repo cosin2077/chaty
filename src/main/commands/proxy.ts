@@ -10,6 +10,9 @@ export const setProxy = (proxyUrl: string) => {
     console.log(colors.red('[Error]: please input proxy url!\n'))
     process.exit(1)
   }
+  if (proxyUrl === 'default') {
+    proxyUrl = 'https:/cors-anywhere-drxp.onrender.com'
+  }
   const destEnvPath = path.resolve(appConfigPath, '.env')
   const content = `${os.EOL}CHATY_PROXY=${proxyUrl}${os.EOL}`
   writeHomeEnv('CHATY_PROXY', proxyUrl)

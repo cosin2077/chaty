@@ -4,11 +4,20 @@ import { fetchApi } from "./utils";
 
 const chatGPTUrl = "https://api.openai.com/v1/chat/completions";
 const chatWithGPT = async (messages: any[]) => {
-  const headers = {
+  const headers: Record<string, any> = {
     Authorization: `Bearer ${process.env.OPEN_AI_KEY}`,
   };
+  let apiUrl = chatGPTUrl
+  let { CHATY_PROXY } = process.env
+  if (CHATY_PROXY) {
+    if (CHATY_PROXY[CHATY_PROXY.length - 1] !== '/') {
+      CHATY_PROXY += '/'
+    }
+    headers.origin = 'https://app.uniswap.org'
+    apiUrl = CHATY_PROXY + chatGPTUrl
+  }
   const answer = await fetchApi(
-    chatGPTUrl,
+    apiUrl,
     "POST",
     { headers },
     {
