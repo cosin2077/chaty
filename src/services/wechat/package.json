@@ -1,6 +1,6 @@
 {
   "name": "chaty-wechat-service",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "chaty wechat bot service",
   "main": "index.js",
   "scripts": {
