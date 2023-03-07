@@ -6,5 +6,7 @@ export async function responseTime(ctx:Koa.ParameterizedContext<any, Router.IRou
   await next();
   const end = process.hrtime(start);
   const diffInMs = (end[0] * 1e9 + end[1]) / 1e6;
-  ctx.body.responseTime = `${diffInMs}ms`;
+  try {
+    ctx.body.responseTime = `${diffInMs}ms`;
+  } catch (_) {}
 }

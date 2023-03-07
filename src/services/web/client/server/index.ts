@@ -4,17 +4,20 @@ import cors from '@koa/cors';
 import serve from 'koa-static'
 import Router from 'koa-router';
 import { koaBody } from 'koa-body'
-import dotenv from 'dotenv'
+import logger from 'koa-logger';
+import dotenv from 'dotenv';
 import { resetMessage, sendMessage } from './chat';
 import { responseTime } from './middlewares/responseTime';
 dotenv.config();
-let PORT = process.env.WEB_PORT;
+let PORT = process.env.S_WEB_PORT || process.env.WEB_PORT;
+console.log(`process.env.S_WEB_PORT:`, process.env.S_WEB_PORT)
 
 const app = new Koa();
 const router = new Router();
 
 app.use(responseTime);
 app.use(cors());
+app.use(logger());
 app.use(koaBody());
 
 app.use(serve(path.resolve(__dirname, '..', 'client')));
@@ -72,16 +75,21 @@ router.post('/chat/reset', async (ctx, next) => {
   }
 });
 
-// 挂载路由中间件
 app.use(router.routes()).use(router.allowedMethods());
 
+
 const listen = () => {
-  // 启动服务
   const server = app.listen(PORT, () => {
-    console.log(`server is running at: http://127.0.0.1:${PORT}`);
+    console.log(`api is running at: http://127.0.0.1:${PORT}`);
   });
   server.on('error', (err) => {
-    console.log(err)
+    if ((err as any).code === "EADDRINUSE") {
+      console.log(`WEB_PORT: ${(PORT as unknown as number)++} is in use. try another...`)
+      server.close();
+      setTimeout(listen, 200)
+  } else {
+      console.log(err)
+  }
   })
 }
 listen();

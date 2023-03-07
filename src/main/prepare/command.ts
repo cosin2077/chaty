@@ -20,9 +20,10 @@ export function registerCommand () {
     .description(
       `
 Chaty supports various services such as:
-    chaty run commandline (command-line chatbot)
+    chaty run command (command-line chatbot)
     chaty run web (private ChatGPT website services)
     chaty run wechat (WeChat chatbot)
+    chaty run node (NodeJS Api service)
     stay tune! more services are under construction...
 To get started, just run "chaty login <openAIKey>" and enter your openAIKey. Once login is successful, you can begin exploring.`
     )
@@ -30,19 +31,20 @@ To get started, just run "chaty login <openAIKey>" and enter your openAIKey. Onc
 
   program
     .command('run [service]')
-    .description('run web/command-line/node/wechat/etc service')
+    .description('run [web/command/node/wechat/etc] service')
+    .option('-p, --port <port>', 'specify web/node service port')
     .action(async (name: string, options, command) => {
       checkKey('OPEN_AI_KEY')
       chatyDebug('run:', name, options)
       switch (name) {
         case name?.match(/web/im)?.input:
-          await runWebService()
+          await runWebService(options)
           break
         case name?.match(/command/im)?.input:
           await runCommandLineService()
           break
         case name?.match(/node(js)?|api/im)?.input:
-          await runNodeService()
+          await runNodeService(options)
           break
         case name?.match(/wechat/im)?.input:
           await runWechatService()

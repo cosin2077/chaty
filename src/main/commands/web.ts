@@ -3,7 +3,7 @@ import path from 'path'
 import { parse as dotenvParse } from 'dotenv'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { logger } from '../../logger'
-import { runChildProcess, runChildProcessSync } from '../../utils'
+import { runChildPromise } from '../../utils'
 import { chatyDebug } from '../prepare/debug'
 import { projectInstall } from 'pkg-install'
 const name = 'web-service'
@@ -47,7 +47,7 @@ async function copyEnv (from: string, to: string) {
   writeFileSync(toEnv, newContent, 'utf-8')
 }
 
-export async function runWebService () {
+export async function runWebService (opts: Record<string, string>) {
   console.log('runWebService...')
 
   const webDir = await getWebServiceDir()
@@ -55,16 +55,18 @@ export async function runWebService () {
 
   const buildArgs: string[] = ['run', 'build']
   const startArgs: string[] = ['run', 'start']
-  const options = {
-    cwd: webDir
+  const options: Record<string, any> = {
+    cwd: webDir,
+    env: { ...process.env }
   }
-  chatyDebug('string to install pkgs for web-service...')
-  await projectInstall({
-    cwd: webDir
-  })
-  chatyDebug('string to build for web-service...')
-  runChildProcessSync(`${cmd} ${buildArgs.join(' ')}`, options)
+  if (opts.port) {
+    options.env.S_WEB_PORT = opts.port
+  }
+  chatyDebug('starting to install pkgs for web-service...')
+  await projectInstall({ cwd: webDir })
+  chatyDebug('starting to build for web-service...')
+  await runChildPromise(name, cmd, buildArgs, options)
 
-  chatyDebug('string to run start for web service...')
-  runChildProcess(name, cmd, startArgs, options)
+  chatyDebug('starting to run start for web service...')
+  await runChildPromise(name, cmd, startArgs, options)
 }

@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 import router from './router';
 import { responseTime } from './middlewares/responseTime';
 dotenv.config();
-export let PORT = process.env.WEB_PORT;
+
 
 const app = new Koa();
 
@@ -15,16 +15,15 @@ app.use(koaBody());
 
 
 app.use(router.routes()).use(router.allowedMethods());
+let PORT = process.env.S_NODE_PORT || process.env.NODE_PORT;
 
 const listen = () => {
-  const { NODE_PORT } = process.env
-  const server = app.listen(NODE_PORT, () => {
-    console.log(`api is running at: http://127.0.0.1:${NODE_PORT}`);
+  const server = app.listen(PORT, () => {
+    console.log(`api is running at: http://127.0.0.1:${PORT}`);
   });
   server.on('error', (err) => {
     if ((err as any).code === "EADDRINUSE") {
-      console.log(`NODE_PORT: ${NODE_PORT} is in use. try another...`)
-      process.env.NODE_PORT = Number(NODE_PORT!) + 1 + ''
+      console.log(`NODE_PORT: ${(PORT as unknown as number)++} is in use. try another...`)
       server.close();
       setTimeout(listen, 200)
   } else {

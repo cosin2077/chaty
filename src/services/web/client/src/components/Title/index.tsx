@@ -6,7 +6,7 @@ function Title() {
           <span className="chatbot-emoji">🤖</span>
         </p>
         <h1 className="title-text">
-          ChatGPT Web Service
+          ChatGPT Web
         </h1>
     </section>
   );

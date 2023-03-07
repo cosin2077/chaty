@@ -99,6 +99,37 @@ export const runChildProcess = (
   })
   return childProcess
 }
+export const runChildPromise = async (
+  name: string,
+  execPath: string,
+  args: string[],
+  options: any
+) => await new Promise((resolve, reject) => {
+  const childProcess = child.spawn(execPath, args, options)
+  chatyDebug(`runChildProcess: ${name}, pid: ${String(childProcess.pid)}`, execPath, args)
+  let output = ''
+  childProcess.stdout.on('data', (data) => {
+    output += data.toString() as string
+    console.log(data.toString() as string)
+  })
+  let errorOut = ''
+  childProcess.stderr.on('data', (data) => {
+    errorOut += data.toString() as string
+  })
+  childProcess.on('exit', (code) => {
+    chatyDebug(`childProcess.on('exit'): ${name}, data: ${String(code)}`)
+    chatyDebug('output', output)
+    if (code !== 0) {
+      chatyDebug('errorOut', errorOut)
+    }
+    resolve(output)
+  })
+  childProcess.on('error', (err) => {
+    chatyDebug(`childProcess.on('error'): ${name},`, err)
+    reject(err)
+  })
+  return childProcess
+})
 export const runChildProcessSync = (execStr: string, options: any) => {
   try {
     const res = child.execSync(execStr, options)

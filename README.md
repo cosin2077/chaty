@@ -1,45 +1,71 @@
-## ✨✨✨Chaty, satisfy all your imagination about chatGPT!  
-You can use it as a command-line assistant;  
-You can use it to deploy a private chatGPT service;  
-You can use it to deploy your NodeJS API for chatGPT;  
-You can use it to deploy your wechat chatGPT bot;  
-You can use it to deploy your telegram chatGPT bot;
+## ✨✨✨Chaty – Making Your ChatGPT Imagination a Reality!
 
-Install it simply with 'npm i -g chaty', and almost everything has been done!
+Read this in other languages: English | [简体中文](./README.zh-CN.md)
 
-Chaty is powered by gpt-3.5-turbo (latest powerful API provided by openAI).
+With Chaty, your imagination about ChatGPT will come to life! Chaty allows you to:
+
+- Use it as a command-line assistant;
+- Deploy a private ChatGPT web service;
+- Deploy your NodeJS API for ChatGPT;
+- Deploy your WeChat ChatGPT bot;
+- Deploy your Telegram ChatGPT bot;  
+- More services are under coding!
+
+Let Chaty take you beyond expectations and into the exciting world of ChatGPT.
 
 ## ⚙️Installation
 
 Chaty is a application based on Node.js, and can be installed with the following command:  
 If you have not installed NodeJS, [click here](https://nodejs.org/)
 ```
-npm i -g chaty
+npm i -g ichaty
+```
+
+## 🔑Login
+
+Login with your openAI key.You can find your API key at https://platform.openai.com/account/api-keys.  
+Then you can start your journey
+```
+chaty login <your-openAI-key>
 ```
 
 ## 🚀Services
 
 Chaty provides multiple service options, and you can choose the most suitable one according to your needs.
 ```
--[x] Private Web Service🚀  
--[x] command line Service🗄️  
--[x] WeChat Robot Service💬   
--[] NodeJS API Service 
--[] Telegram Bot Service🤖  
+-[x] command line Service📁   
+-[x] private Web Service🚀  
+-[x] weChat Robot Service💬   
+-[x] nodeJS API Service💻 
+-[] telegram Bot Service🤖  
 ```
+
+### 📁command line Service   
+```
+chaty run command
+```
+![](./assets/images/command.jpg)
 ### 🌍Private Web Service
 
+Chaty can deploy a private web service, and you can access the Chaty service you created anytime by visiting http://localhost:9522.  
+you can specify port with <code>chaty run web --port \<your-port\></code>  
+```
+chaty run web --port 9555
+```
+![](./assets/images/web.jpg)
 
-Chaty can deploy a private web service, and you can access the Chaty service you created anytime by visiting http://localhost:5173.
+### 💬WeChat Robot Service
+
+Chaty can also deploy a WeChat robot service, allowing you to chat with Chaty through a WeChat account.  
+```
+chaty run wechat
+```
+
 
 ### 🤖Telegram Bot Service
 
 Chaty can also deploy Telegram Bot service, enabling your users to chat with Chaty in Telegram. Simply send a message to '@your-bot' to initiate the chatbot service.
 
-### 💬WeChat Robot Service
-
-
-Chaty can also deploy a WeChat robot service, allowing you to chat with Chaty through a WeChat account.
 
 ## Usage
 
