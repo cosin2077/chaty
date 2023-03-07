@@ -1,17 +1,35 @@
-## ✨✨✨Chaty – Making Your ChatGPT Imagination a Reality!
+## ✨✨✨Chaty – ChatGPT ALl In One!
 
 Read this in other languages: English | [简体中文](./README.zh-CN.md)
 
-With Chaty, your imagination about ChatGPT will come to life! Chaty allows you to:
+With Chaty, your needs about ChatGPT will come to life! Chaty allows you to:
 
 - Use it as a command-line assistant;
 - Deploy a private ChatGPT web service;
-- Deploy your NodeJS API for ChatGPT;
-- Deploy your WeChat ChatGPT bot;
-- Deploy your Telegram ChatGPT bot;  
+- Deploy NodeJS API for ChatGPT;
+- Deploy WeChat ChatGPT bot;
+- Deploy Telegram ChatGPT bot;  
 - More services are under coding!
 
 Let Chaty take you beyond expectations and into the exciting world of ChatGPT.
+## Usage
+Chaty is very easy to use!  
+install ichaty first  
+```javascript
+npm i -g ichaty
+```
+then login with your openAI key  
+```javascript
+npm login <your-openAI-key>
+```
+```javascript
+chaty // show you all commands and options  
+chaty run command // run as a command chatGPT bot
+chaty run web // deploy a web chatGPT service
+chaty run node // deploy a node chatGPT api service
+chaty run wechat // deploy a wechat chatGPT bot
+chaty run telegram // deploy a telegram chatGPT bot
+```
 
 ## ⚙️Installation
 
@@ -53,6 +71,7 @@ you can specify port with <code>chaty run web --port \<your-port\></code>
 chaty run web --port 9555
 ```
 ![](./assets/images/web.jpg)
+![](./assets/images/web2.jpg)
 
 ### 💬WeChat Robot Service
 
@@ -60,28 +79,20 @@ Chaty can also deploy a WeChat robot service, allowing you to chat with Chaty th
 ```
 chaty run wechat
 ```
+Scan qrcode on terminal then login your wechat!  
+![](./assets/images/wechat.jpg)
 
+Just send message with hello/你好 to start your journey~
+![](./assets/images/wechat2.png)
 
-### 🤖Telegram Bot Service
+### 🤖Telegram Bot Service(under construction...)
 
 Chaty can also deploy Telegram Bot service, enabling your users to chat with Chaty in Telegram. Simply send a message to '@your-bot' to initiate the chatbot service.
 
 
-## Usage
 
-Chaty is easy to integrate into your application, and provides reliable human-machine interaction service. Before using Chaty, make sure you have prepared the required packages for Chaty and other applications. Then, you can create a Chaty instance:
-
-```javascript
-chaty // command-line interaction  
-chaty --web // provide web api
-chaty --api // provide js api
-chaty --wechat // provide wechat api
-chaty --telegram // provide telegram api
-```
-
-Then, you can start interacting with Supo！
 ## Additional Features
 
-In addition to the basic functions mentioned above, Chaty also provides some additional features, such as replying to historical messages, and enabling or disabling commands. You can refer to our API documentation for more information.
+More services are under construction!(discord, telegram, slack...)
 
 Thank you for choosing Chaty! If you have any questions or suggestions, please feel free to contact us!

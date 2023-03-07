@@ -7,6 +7,7 @@ import { runNodeService } from '../commands/node'
 import { runCommandLineService } from '../commands/commandLine'
 import { runLogin } from './login'
 import { setLang } from '../commands/lang'
+import { setProxy } from '../commands/proxy'
 import { checkKey } from './checkKey'
 import { chatyDebug } from './debug'
 
@@ -76,6 +77,16 @@ To get started, just run "chaty login <openAIKey>" and enter your openAIKey. Onc
     .action((key, options, command) => {
       chatyDebug('lang:', key, options)
       setLang(key)
+    })
+
+  program
+    .command('proxy [proxyUrl]')
+    .description(
+      'set proxy for openai request!'
+    )
+    .action((key, options, command) => {
+      chatyDebug('proxy:', key, options)
+      setProxy(key)
     })
 
   program.on('option:debug', () => {

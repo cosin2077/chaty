@@ -1,54 +1,102 @@
-👋 欢迎！
-Supo是一个开源项目，可以通过“npm i -g supo”进行安装，旨在提供多种服务选项，包括私人Web服务、Telegram Bot服务、NodeJS API服务和微信机器人服务。
+## ✨✨✨Chaty – 一站式chatGPT百宝箱
 
-Supo由gpt-3.5-turbo（OpenAI提供的最新优秀API）提供支持。
+Chaty可以让您：
+
+- 拥有一个chatGPT命令行机器人;
+- 部署ChatGPT Web服务;
+- 部署基于ChatGPT的NodeJS API 服务;
+- 部署微信ChatGPT机器人;
+- 部署Telegram ChatGPT机器人;
+- 部署Discord ChatGPT机器人;
+- 更多服务正在不断开发中!
+
+让Chaty助力您探索ChatGPT的世界。
+
+## 使用方法
+
+Chaty的使用非常方便  
+首先安装
+```javascript
+npm i -g ichaty
+```
+然后登录
+```javascript
+npm login <your-openAI-key>
+```
+
+```javascript
+chaty // 显示所有命令和选项  
+chaty run command // 运行作为命令行ChatGPT机器人
+chaty run web // 部署Web ChatGPT服务
+chaty run node // 部署Node ChatGPT API服务
+chaty run wechat // 部署WeChat ChatGPT机器人
+chaty run telegram // 部署Telegram ChatGPT机器人
+```
 
 ## 安装🤖
 
-Supo是一个基于Node.js的应用程序，可以使用以下命令进行安装：
+Supo是一个基于Node.js的应用程序，可以使用以下命令进行安装：  
+如果您还没有安装NodeJS，请[点击这里](https://nodejs.org/)
+
 
 ```
 npm i -g chaty
 ```
+## 🔑登录
+
+使用您的openAI密钥登录。您可以在https://platform.openai.com/account/api-keys上找到您的API密钥。  
+然后，尽情遨游吧
+```
+chaty login <your-openAI-key>
+```
+
 
 ## 服务
 
 Chaty 提供多种不同的服务选项，您可根据自己需求选择合适的服务。  
 ```
--[x] 私有化web服务  
--[x] 命令行机器人  
--[x] 微信机器人服务  
--[] NodeJS API服务  
--[] Telegram Bot 服务  
+-[x] 命令行(终端)机器人服务📁   
+-[x] chatGPT Web服务🚀  
+-[x] 微信机器人服务💬   
+-[x] nodeJS API服务💻 
+-[] telegram机器人服务🤖  
+-[] discord机器人服务🤖  
 ```
-### 私有化 web 服务
-
-Chaty 可以同时提供私有化的 web 服务，您可以随时通过访问 http://localhost:3000 访问您创建的 Chaty 服务。
-
-### Telegram Bot 服务
-
-Chaty 还可以提供 Telegram Bot 服务，您的用户可以在 Telegram 中与 Chaty 进行聊天。只需向“@chatgpt_bot”发送消息即可开启聊天机器人服务。
-
-### 微信机器人服务
-
-Chaty 也可以提供微信机器人服务，通过微信公众号与 Chaty 进行聊天。 
-
-## 使用
-
-Chaty 很容易就可以接入您的应用程序，并提供可靠的人机交互服务。在使用 Chaty 之前，请确保您已经准备好了 Chaty 等应用程序所需包。然后，您可以创建一个 Chaty 实例：
-
-```javascript
-chaty --web // provide web api
-chaty --api // provide js api
-chaty --wechat // provide wechat api
-chaty --telegram // provide telegram api
+### 📁命令行服务   
 ```
+chaty run command
+```
+![](./assets/images/command.jpg)
+
+### 🌍私有Web服务
+
+Chaty可以部署私人Web服务，您可以通过访问http://localhost:9522 随时访问您创建的Chaty服务。  
+您可以用<code>chaty run web --port \<your-port\></code>来指定端口。
+```
+chaty run web --port 9555
+```
+![](./assets/images/web.jpg)
+![](./assets/images/web2.jpg)
+
+### 💬微信机器人服务
+
+Chaty还可以部署微信机器人服务，允许您通过微信账户与Chaty聊天。  
+```
+chaty run wechat
+```
+在终端上扫描二维码然后登录您的微信！  
+![](./assets/images/wechat.jpg)
+
+只需发送包含hello/你好的消息即可开始您的旅程～
+![](./assets/images/wechat2.png)
+
+### 🤖Telegram机器人服务(正在开发中...)
+
+Chaty还可以部署Telegram机器人服务，让您的用户可以在Telegram中与Chaty聊天。只需向"@your-bot"发送一条消息即可启动聊天机器人服务。
 
 
-然后，您就可以开始与 Chaty 进行互动了！
+# 其他特点
 
-## 额外功能
+更多的服务正在部署中！（discord, telegram, slack...）
 
-除了上述基本功能外，Supo 还提供了一些额外的功能，例如回复历史消息或启用允许或禁止指令等。可以参阅我们的 API 文档以了解更多信息。
-
-感谢您选择 Supo！如果您有任何问题或建议，请随时联系我们！# chaty
+感谢您选择Chaty！如果您有任何问题或建议，请随时与我们联系！
