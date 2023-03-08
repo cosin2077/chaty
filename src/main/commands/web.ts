@@ -3,7 +3,7 @@ import path from 'path'
 import { parse as dotenvParse } from 'dotenv'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { logger } from '../../logger'
-import { runChildPromise } from '../../utils'
+import { runChildPromise, spinnerStart } from '../../utils'
 import { chatyDebug } from '../prepare/debug'
 import { projectInstall } from 'pkg-install'
 const name = 'web-service'
@@ -62,10 +62,15 @@ export async function runWebService (opts: Record<string, string>) {
   if (opts.port) {
     options.env.S_WEB_PORT = opts.port
   }
+  const installSpin = spinnerStart('starting to install pkgs for web-service...')
   chatyDebug('starting to install pkgs for web-service...')
   await projectInstall({ cwd: webDir })
+  installSpin.stop()
+
+  const buildSpin = spinnerStart('starting to build for web-service..')
   chatyDebug('starting to build for web-service...')
   await runChildPromise(name, cmd, buildArgs, options)
+  buildSpin.stop()
 
   chatyDebug('starting to run start for web service...')
   await runChildPromise(name, cmd, startArgs, options)

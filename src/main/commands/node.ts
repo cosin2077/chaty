@@ -4,7 +4,7 @@ import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { appConfigPath } from '../../constants/index'
 import { projectInstall } from 'pkg-install'
 import { logger } from '../../logger'
-import { runChildPromise } from '../../utils'
+import { runChildPromise, spinnerStart } from '../../utils'
 import { chatyDebug } from '../prepare/debug'
 const name = 'node-service'
 let cmd = 'npm'
@@ -62,13 +62,16 @@ export async function runNodeService (opts: Record<string, string>) {
   if (opts.port) {
     options.env.S_WEB_PORT = opts.port
   }
+  const installSpin = spinnerStart('starting to install pkgs for NodeJS API service...')
   chatyDebug('starting to install pkgs for NodeJS API service...')
   await projectInstall({
     cwd: webDir
   })
+  installSpin.stop()
+  const buildSpin = spinnerStart('starting to build for NodeJS API service...')
   chatyDebug('starting to build for NodeJS API service...')
   await runChildPromise(name, cmd, buildArgs, options)
-
+  buildSpin.stop()
   chatyDebug('starting to run start for web service...')
   await runChildPromise(name, cmd, startArgs, options)
 }
