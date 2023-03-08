@@ -97,6 +97,13 @@ chaty proxy default
 as a temporary proxy solution.  
 For a long-term solution, it is recommended to run on a server that supports accessing api.openai.com or use a stable proxy.
 
+## under coding
+
+- [] support SSE
+- [] support command line/ web service save dialog
+- [] faster service
+- [] config wechat robot params
+- [] better web service ui
 ## Additional Features
 
 More services are under construction!(discord, telegram, slack...)
