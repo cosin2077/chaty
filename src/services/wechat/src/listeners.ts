@@ -51,7 +51,7 @@ async function onMessage(message: MessageInterface) {
   console.log(
     `[${new Date().toLocaleString()}] contact: ${contact}, text:${text}, room: ${room}`
   );
-  if (/^(你|您)?好$/gim.test(text) || /hello/gim.test(text)) {
+  if (/(你|您)好$/gim.test(text) || /hello/gim.test(text)) {
     if (!gptUserList.includes(contact)) {
       message.say(
         `
@@ -99,18 +99,19 @@ async function onMessage(message: MessageInterface) {
       console.log(reply);
     }
     await message.say(reply);
-  } else {
-    message.say(
-      `
-欢迎使用Chaty超级智能机器人~
-您可以输入:
-开始|start: 进入对话
-重置|reset: 重置对话(开始一段新对话)
-退出|exit : 退出对话
-祝您旅途愉快！
-`
-    );
   }
+//   else {
+//     message.say(
+//       `
+// 欢迎使用Chaty超级智能机器人~
+// 您可以输入:
+// 开始|start: 进入对话
+// 重置|reset: 重置对话(开始一段新对话)
+// 退出|exit : 退出对话
+// 祝您旅途愉快！
+// `
+//     );
+//   }
 }
 
 const listeners = [onScan, onLogout, onLogin, onFriendship, onMessage];
