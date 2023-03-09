@@ -67,11 +67,13 @@ export async function runNodeService (opts: Record<string, string>) {
   await projectInstall({
     cwd: webDir
   })
-  installSpin.stop()
+  installSpin.succeed('install pkgs for NodeJS API service succeed!')
   const buildSpin = spinnerStart('starting to build for NodeJS API service...')
+
   chatyDebug('starting to build for NodeJS API service...')
   await runChildPromise(name, cmd, buildArgs, options)
-  buildSpin.stop()
+  buildSpin.succeed('build for NodeJS API service succeed!')
+
   chatyDebug('starting to run start for web service...')
   await runChildPromise(name, cmd, startArgs, options)
 }

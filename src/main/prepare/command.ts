@@ -13,7 +13,7 @@ import { chatyDebug } from './debug'
 
 const program = new commander.Command()
 
-export function registerCommand () {
+export async function registerCommand () {
   program
     .name(Object.keys(pkg.bin)[0])
     .usage('<command> [options]')

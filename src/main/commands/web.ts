@@ -65,12 +65,12 @@ export async function runWebService (opts: Record<string, string>) {
   const installSpin = spinnerStart('starting to install pkgs for web-service...')
   chatyDebug('starting to install pkgs for web-service...')
   await projectInstall({ cwd: webDir })
-  installSpin.stop()
+  installSpin.succeed('install pkgs for web-service succeed!')
 
   const buildSpin = spinnerStart('starting to build for web-service..')
   chatyDebug('starting to build for web-service...')
   await runChildPromise(name, cmd, buildArgs, options)
-  buildSpin.stop()
+  buildSpin.succeed('build for web-service succeed!')
 
   chatyDebug('starting to run start for web service...')
   await runChildPromise(name, cmd, startArgs, options)

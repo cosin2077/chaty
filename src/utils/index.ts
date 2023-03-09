@@ -6,7 +6,7 @@ import child from 'child_process'
 import { chatyDebug } from '../main/prepare/debug'
 import { appConfigPath } from '../constants'
 import path from 'path'
-import cliSpinner from 'cli-spinner'
+import ora from 'ora'
 import { ensureFileSync, readFileSync, writeFileSync } from 'fs-extra'
 const rl = readline.createInterface({
   input: process.stdin,
@@ -72,13 +72,42 @@ export const fetchApi = async (
     ...defineHeaders,
     'User-Agent': randomUserAgent()
   }
-  return await axios(apiUrl, {
+  const options = {
     method,
     headers,
     params,
+    signal: params.signal,
     data: body
-  }).then((res: AxiosResponse) => res.data)
+  }
+  return await axios(apiUrl, options).then((res: AxiosResponse) => res.data)
 }
+
+export const fetchApiWithTimeout = async (
+  apiUrl: string,
+  method = 'GET',
+  params: any,
+  body: any,
+  timeout: string | number
+) => await new Promise((resolve, reject) => {
+  try {
+    const controller = new AbortController()
+    if (params) {
+      params.signal = controller.signal
+    }
+    const timer = setTimeout(() => {
+      controller.abort()
+      resolve('timeout')
+    }, Number(timeout))
+    fetchApi(apiUrl, method, params, body)
+      .then((res) => {
+        resolve(res)
+        clearTimeout(timer)
+      })
+      .catch(reject)
+  } catch (err) {
+    reject(err)
+  }
+})
 
 export const runChildProcess = (
   name: string,
@@ -151,10 +180,25 @@ export const writeHomeEnv = function (prop: string, value: string) {
   writeFileSync(destEnvPath, newContent, 'utf-8')
 }
 
-export function spinnerStart (loadingMsg = 'loading', spinnerString = '|/-\\') {
-  const { Spinner } = cliSpinner
-  const spinner = new Spinner(`${loadingMsg}.. %s`)
-  spinner.setSpinnerString(spinnerString)
-  spinner.start()
+export function spinnerStart (loadingMsg = 'loading') {
+  const spinner = ora({
+    text: `${loadingMsg}...`,
+    spinner: {
+      interval: 80,
+      frames: '|/-\\'.split('')
+    }
+  }).start()
   return spinner
+}
+export const isValidUrl = (urlStr: string) => {
+  try {
+    return Boolean(new URL(urlStr))
+  } catch (e) {
+    return false
+  }
+}
+export const readEnvInFile = (prop: string, envPath: string) => {
+  if (!prop || !envPath) throw new Error('prop and envPath are needed!')
+  const envConfig = dotenv.parse(readFileSync(envPath, 'utf-8'))
+  return envConfig[prop]
 }

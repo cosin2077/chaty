@@ -2,9 +2,11 @@ import os from 'os'
 import path from 'path'
 
 export const appName = 'chaty'
+export const appEnvName = '.env'
 export const appConfigDirName = '.chaty'
 export const appConfigLog = 'logs'
 export const appConfigPath = path.resolve(os.homedir(), appConfigDirName)
+export const appEnvConfigPath = path.resolve(appConfigPath, appEnvName)
 export const appLogPath = path.resolve(appConfigPath, appConfigLog)
 
 function getProperty<T, K extends keyof T> (obj: T, key: K): T[K] {

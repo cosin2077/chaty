@@ -52,14 +52,14 @@ export async function runWechatService () {
   }
   const installSpin = spinnerStart('starting to install pkgs for wechat service...')
   chatyDebug('starting to install pkgs for wechat service...')
-  await projectInstall({
-    cwd: webDir
-  })
-  installSpin.stop()
+  await projectInstall({ cwd: webDir })
+  installSpin.succeed('install pkgs for wechat service succeed!')
+
   const buildSpin = spinnerStart('starting build pkgs for wechat service...')
   chatyDebug('starting build pkgs for wechat service...')
   await runChildPromise(name, cmd, buildArgs, options)
-  buildSpin.stop()
+  buildSpin.succeed('build pkgs for wechat service succeed!')
+
   chatyDebug('starting to run wechat service...')
   await runChildPromise(name, cmd, startArgs, options)
 }
