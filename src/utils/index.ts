@@ -90,6 +90,7 @@ export const fetchApiWithTimeout = async (
   timeout: string | number
 ) => await new Promise((resolve, reject) => {
   try {
+    const start = ora('starting to check chaty version...').start()
     const controller = new AbortController()
     if (params) {
       params.signal = controller.signal
@@ -97,14 +98,17 @@ export const fetchApiWithTimeout = async (
     const timer = setTimeout(() => {
       controller.abort()
       resolve('timeout')
+      start.fail('check chaty version timeout')
     }, Number(timeout))
     fetchApi(apiUrl, method, params, body)
       .then((res) => {
         resolve(res)
+        start.succeed('check chaty version succeed')
         clearTimeout(timer)
       })
       .catch(reject)
   } catch (err) {
+    chatyDebug((err as Error).message)
     reject(err)
   }
 })

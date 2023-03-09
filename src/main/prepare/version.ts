@@ -53,9 +53,13 @@ export async function checkVersion () {
   if (!needCheck) return
   chatyDebug('checkVersion...')
   const fullUrl = new URL(projectName, npmRegistry).toString()
-  const data = await fetchApiWithTimeout(fullUrl, 'GET', {}, {}, 1e3)
-  const { latest } = data as any['dist-tags']
-  console.log(pkg.version = '0.1.1')
+  const data = await fetchApiWithTimeout(fullUrl, 'GET', {}, {}, 3.5 * 1e3)
+  if (data === 'timeout') {
+    chatyDebug('fetchApiWithTimeout timeout')
+    return
+  }
+  const { latest } = (data as any)['dist-tags']
+  chatyDebug(pkg.version, latest)
   if (semver.valid(latest) && semver.valid(pkg.version)) {
     if (semver.gt(latest, pkg.version)) {
       console.log(colors.green(`chaty latest version: ${latest as string}`))
