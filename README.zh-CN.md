@@ -21,7 +21,7 @@ npm i -g ichaty
 ```
 然后登录
 ```javascript
-npm login <your-openAI-key>
+ichaty login <your-openAI-key>
 ```
 
 ```javascript
