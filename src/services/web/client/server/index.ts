@@ -3,14 +3,14 @@ import Koa from 'koa';
 import cors from '@koa/cors';
 import serve from 'koa-static'
 import Router from 'koa-router';
-import { koaBody } from 'koa-body'
-import logger from 'koa-logger';
 import dotenv from 'dotenv';
+import logger from 'koa-logger';
+import { koaBody } from 'koa-body'
 import { resetMessage, sendMessage } from './chat';
 import { responseTime } from './middlewares/responseTime';
 dotenv.config();
 let PORT = process.env.S_WEB_PORT || process.env.WEB_PORT;
-console.log(`process.env.S_WEB_PORT:`, process.env.S_WEB_PORT)
+// console.log(`process.env.S_WEB_PORT:`, process.env.S_WEB_PORT)
 
 const app = new Koa();
 const router = new Router();
