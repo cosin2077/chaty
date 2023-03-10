@@ -2,8 +2,7 @@
   "include": ["src/**/*.ts", "src/index.ts"],
   "exclude": [
     "node_modules",
-    "./src/services/web/client",
-    "./src/services/wechat"
+    "./src/services",
   ],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */

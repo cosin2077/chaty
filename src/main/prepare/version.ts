@@ -58,6 +58,7 @@ export async function checkVersion () {
     chatyDebug('fetchApiWithTimeout timeout')
     return
   }
+  writeHomeEnv(LAST_VERSION_CHECK, String(Date.now()))
   chatyDebug(`write home .env ${LAST_VERSION_CHECK}, ${Date.now()} succeed!`)
   const { latest } = (data as any)['dist-tags']
   chatyDebug(pkg.version, latest)
@@ -66,7 +67,6 @@ export async function checkVersion () {
       console.log(colors.green(`chaty latest version: ${latest as string}`))
       console.log(colors.red(`local version: ${pkg.version}`))
       console.log(boxen('please install the latest version with: npm i -g ichaty', { padding: 1 }))
-      writeHomeEnv(LAST_VERSION_CHECK, String(Date.now()))
     }
   }
 }
