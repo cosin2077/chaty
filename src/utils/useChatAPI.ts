@@ -26,9 +26,21 @@ const chatWithGPT = async (messages: any[]) => {
   return answer
 }
 
-const messageManager = (() => {
+export const messageManager = (() => {
   const messageMap = new Map<any, any[]>()
+  let usageList: Record<string, any[]> = {};
   return {
+    addUsage: (usage: any, user: string) =>{
+      if (!usageList[user]) {
+        usageList[user] = []
+      }
+      usageList[user].push(usage);
+    },
+    getUsage: (user: string) => {
+      if (usageList[user]) {
+        return usageList[user]
+      }
+    },
     sendMessage: (content: string, user: string) => {
       if (!messageMap.get(user)) {
         messageMap.set(user, [])
@@ -75,6 +87,7 @@ export async function sendMessage (message: string, user: string) {
     // chatyDebug(answer);
     // chatyDebug("-----------newAnswers----------");
     messageManager.concatAnswer(answer, user)
+    messageManager.addUsage(completion.usage, user);
     return answer
   } catch (err) {
     messageManager.popMessage(user)

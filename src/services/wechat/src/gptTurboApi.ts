@@ -28,9 +28,21 @@ const chatWithGPT = async (messages: any[]) => {
   return answer;
 };
 
-const messageManager = (() => {
+export const messageManager = (() => {
   let messageMap: Record<string, any[]> = {};
+  let usageList: Record<string, any[]> = {};
   return {
+    addUsage: (usage: any, user: string) =>{
+      if (!usageList[user]) {
+        usageList[user] = []
+      }
+      messageMap[user].push(usage);
+    },
+    getUsage: (user: string) => {
+      if (messageMap[user]) {
+        return messageMap[user]
+      }
+    },
     sendMessage: (content: string, user: string) => {
       if (!messageMap[user]) {
         messageMap[user] = [];
@@ -75,6 +87,7 @@ export async function sendMessage(message: string, user: string) {
     console.log(answer);
     console.log("-----------newAnswers----------");
     messageManager.concatAnswer(answer, user);
+    messageManager.addUsage(completion.usage, user);
     return answer;
   } catch (err) {
     messageManager.popMessage(user);
@@ -87,7 +100,7 @@ export async function sendMessage(message: string, user: string) {
         append = "[errored][context_length_exceeded]";
       }
       errorBody = JSON.stringify(errorBody);
-    } catch (_) {}
+    } catch (_) { }
     return (err as Error).message + "   " + errorBody + "[errored]";
   }
 }

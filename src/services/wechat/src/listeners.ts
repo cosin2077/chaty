@@ -6,7 +6,7 @@ import {
   WechatyInterface,
 } from "wechaty/impls";
 import { asyncSleep } from "./utils";
-import { sendMessage, resetMessage } from "./gptTurboApi";
+import { sendMessage, resetMessage, messageManager } from "./gptTurboApi";
 
 function onScan(qrcode: string, status: number) {
   require("qrcode-terminal").generate(qrcode, { small: true }); // 在console端显示二维码
@@ -54,14 +54,14 @@ async function onMessage(message: MessageInterface) {
   if (/(你|您)好$/gim.test(text) || /hello/gim.test(text)) {
     if (!gptUserList.includes(contact)) {
       message.say(
-        `
-  欢迎使用Chaty超级智能机器人~
-  您可以输入:
-  开始|start: 进入对话
-  重置|reset: 重置对话(开始一段新对话)
-  退出|exit : 退出对话
-  祝您旅途愉快！
-  `
+`
+欢迎使用Chaty超级智能机器人~
+您可以输入:
+开始|start: 进入对话
+重置|reset: 重置对话(开始一段新对话)
+退出|exit : 退出对话
+祝您旅途愉快！
+`
       );
       return;
     }
@@ -84,6 +84,14 @@ async function onMessage(message: MessageInterface) {
     await asyncSleep(1 * 1e3);
     await message.say("您可以输入新的内容了！");
     return;
+  }
+  if (/^(usage|额度|用量)/gim.test(text)) {
+    const res = await messageManager.getUsage(contact.toString());
+    if (Array.isArray(res)) {
+      console.log(res[res.length - 1])
+      await message.say(res[res.length - 1]);
+      return;
+    }
   }
   if (gptUserList.includes(contact) && text) {
     console.log(

@@ -1,5 +1,5 @@
 import { confirmReadline } from '../../utils'
-import { resetMessage, sendMessage } from '../../utils/useChatAPI'
+import { resetMessage, sendMessage, messageManager } from '../../utils/useChatAPI'
 
 export const runCommandLineService = async () => {
   console.log('run command-line bot service...')
@@ -21,11 +21,17 @@ export const runCommandLineService = async () => {
       setTimeout(() => {
         process.exit(0)
       }, 200)
-
       break
     }
     if (/reset|重置/gim.test(answer)) {
       await resetMessage(user)
+      continue
+    }
+    if (/^(usage|额度|用量)/gim.test(answer)) {
+      const res = await messageManager.getUsage(user);
+      if (Array.isArray(res)) {
+        console.log(res[res.length - 1])
+      }
       continue
     }
     console.log('\x1b[36m%s\x1b[0m', answer)
