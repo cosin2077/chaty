@@ -20,7 +20,7 @@ npm i -g ichaty
 ```
 then login with your openAI key  
 ```javascript
-npm login <your-openAI-key>
+chaty login <your-openAI-key>
 ```
 ```javascript
 chaty // show you all commands and options  

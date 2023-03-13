@@ -28,7 +28,7 @@ export const runCommandLineService = async () => {
       continue
     }
     if (/^(usage|额度|用量)/gim.test(answer)) {
-      const res = await messageManager.getUsage(user);
+      const res = messageManager.getUsage(user)
       if (Array.isArray(res)) {
         console.log(res[res.length - 1])
       }

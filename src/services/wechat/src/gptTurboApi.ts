@@ -32,15 +32,30 @@ export const messageManager = (() => {
   let messageMap: Record<string, any[]> = {};
   let usageList: Record<string, any[]> = {};
   return {
-    addUsage: (usage: any, user: string) =>{
+    addUsage: (usage: any, user: string) => {
       if (!usageList[user]) {
         usageList[user] = []
       }
-      messageMap[user].push(usage);
+      usageList[user].push(usage);
     },
     getUsage: (user: string) => {
-      if (messageMap[user]) {
-        return messageMap[user]
+      if (usageList[user]) {
+        return usageList[user]
+      }
+    },
+    getUsagePrint: (user: string) => {
+      const allUsage = usageList[user]
+      const usage = allUsage[allUsage.length - 1]
+      if (usage) {
+        let ret = ''
+        for (let prop in usage) {
+          switch (prop) {
+            case 'prompt_tokens': ret = `您的输入：${usage.prompt_tokens}\n`; break
+            case 'completion_tokens': ret = `对话已用：${usage.completion_tokens}\n`; break
+            case 'total_tokens': ret = `共计：${usage.total_tokens}\n`; break
+          }
+        }
+        return ret
       }
     },
     sendMessage: (content: string, user: string) => {

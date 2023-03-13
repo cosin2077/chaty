@@ -28,13 +28,13 @@ const chatWithGPT = async (messages: any[]) => {
 
 export const messageManager = (() => {
   const messageMap = new Map<any, any[]>()
-  let usageList: Record<string, any[]> = {};
+  const usageList: Record<string, any[]> = {};
   return {
     addUsage: (usage: any, user: string) =>{
       if (!usageList[user]) {
         usageList[user] = []
       }
-      usageList[user].push(usage);
+      usageList[user].push(usage)
     },
     getUsage: (user: string) => {
       if (usageList[user]) {

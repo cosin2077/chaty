@@ -2,3 +2,4 @@
 **/.DS_Store
 **/.env
 **/lib
+**/package-lock.json

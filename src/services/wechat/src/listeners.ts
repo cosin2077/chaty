@@ -41,11 +41,34 @@ async function onFriendship(
   }
 }
 let gptUserList: ContactInterface[] = [];
-async function onMessage(message: MessageInterface) {
+async function onMessage(message: MessageInterface, bot: WechatyInterface) {
   const contact = message.talker();
   const room = message.room();
   let text = message.text();
-  if (room) return;
+  if (room) {
+    try {
+      const topic = await room.topic()
+      const selfName = bot.currentUser.name()
+      console.log(`room topic is : ${topic}, ${text}`)
+      if (text.indexOf(`@${selfName}`) !== -1) {
+        text = text.split(`@${selfName}`)[1].trim()
+        if (!text) return
+        const username = `${topic.toString()}-${contact.toString()}`
+        let reply = await sendMessage(text, username);
+        if (/\[errored\]$/gim.test(reply)) {
+          reply = "遇到问题了，请稍后再试！";
+        }
+        if (/\[context_length_exceeded\]$/gim.test(reply)) {
+          reply = "本轮会话长度太长啦，我记不住这么多东西，请重试！";
+        }
+        console.log(reply);
+        room.say(reply, contact)
+      }
+    } catch (err) {
+      console.log((err as Error).message);
+    }
+    return
+  }
   if (message.self()) return;
   text = text.trim();
   console.log(
@@ -54,8 +77,8 @@ async function onMessage(message: MessageInterface) {
   if (/(你|您)好$/gim.test(text) || /hello/gim.test(text)) {
     if (!gptUserList.includes(contact)) {
       message.say(
-`
-欢迎使用Chaty超级智能机器人~
+        `
+欢迎使用Chaty-基于chatGPT的AI助手~
 您可以输入:
 开始|start: 进入对话
 重置|reset: 重置对话(开始一段新对话)
@@ -86,12 +109,9 @@ async function onMessage(message: MessageInterface) {
     return;
   }
   if (/^(usage|额度|用量)/gim.test(text)) {
-    const res = await messageManager.getUsage(contact.toString());
-    if (Array.isArray(res)) {
-      console.log(res[res.length - 1])
-      await message.say(res[res.length - 1]);
-      return;
-    }
+    const humanUsage = await messageManager.getUsagePrint(contact.toString());
+    console.log(humanUsage)
+    return
   }
   if (gptUserList.includes(contact) && text) {
     console.log(
@@ -108,18 +128,6 @@ async function onMessage(message: MessageInterface) {
     }
     await message.say(reply);
   }
-//   else {
-//     message.say(
-//       `
-// 欢迎使用Chaty超级智能机器人~
-// 您可以输入:
-// 开始|start: 进入对话
-// 重置|reset: 重置对话(开始一段新对话)
-// 退出|exit : 退出对话
-// 祝您旅途愉快！
-// `
-//     );
-//   }
 }
 
 const listeners = [onScan, onLogout, onLogin, onFriendship, onMessage];
@@ -128,7 +136,9 @@ export const bindListeners = (bot: WechatyInterface) => {
     .on("scan", onScan)
     .on("login", onLogin)
     .on("logout", onLogout)
-    .on("message", onMessage)
+    .on("message", (message: MessageInterface) => {
+      onMessage(message, bot)
+    })
     .on("friendship", (friendship: FriendshipInterface) =>
       onFriendship(friendship, bot)
     );
