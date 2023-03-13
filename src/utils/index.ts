@@ -106,7 +106,10 @@ export const fetchApiWithTimeout = async (
         start.succeed('check chaty version succeed')
         clearTimeout(timer)
       })
-      .catch(reject)
+      .catch((err) => {
+        start.fail('check chaty version error: ', (err as Error).message)
+        reject(err)
+      })
   } catch (err) {
     chatyDebug((err as Error).message)
     reject(err)
