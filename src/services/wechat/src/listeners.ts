@@ -54,6 +54,12 @@ async function onMessage(message: MessageInterface, bot: WechatyInterface) {
         text = text.split(`@${selfName}`)[1].trim()
         if (!text) return
         const username = `${topic.toString()}-${contact.toString()}`
+        if (/^(usage|额度|用量)/gim.test(text)) {
+          const humanUsage = await messageManager.getUsagePrint(username);
+          console.log(humanUsage)
+          await message.say(humanUsage!);
+          return
+        }
         let reply = await sendMessage(text, username);
         if (/\[errored\]$/gim.test(reply)) {
           reply = "遇到问题了，请稍后再试！";
@@ -111,6 +117,7 @@ async function onMessage(message: MessageInterface, bot: WechatyInterface) {
   if (/^(usage|额度|用量)/gim.test(text)) {
     const humanUsage = await messageManager.getUsagePrint(contact.toString());
     console.log(humanUsage)
+    await message.say(humanUsage!);
     return
   }
   if (gptUserList.includes(contact) && text) {

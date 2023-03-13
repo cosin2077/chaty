@@ -45,18 +45,20 @@ export const messageManager = (() => {
     },
     getUsagePrint: (user: string) => {
       const allUsage = usageList[user]
+      if (!(allUsage && allUsage.length)) return
       const usage = allUsage[allUsage.length - 1]
+      let ret = '没有额度信息'
       if (usage) {
-        let ret = ''
+        ret = ''
         for (let prop in usage) {
           switch (prop) {
-            case 'prompt_tokens': ret = `您的输入：${usage.prompt_tokens}\n`; break
-            case 'completion_tokens': ret = `对话已用：${usage.completion_tokens}\n`; break
-            case 'total_tokens': ret = `共计：${usage.total_tokens}\n`; break
+            case 'prompt_tokens': ret += `您的输入：${usage.prompt_tokens}\n`; break
+            case 'completion_tokens': ret += `回答已用：${usage.completion_tokens}\n`; break
+            case 'total_tokens': ret += `共计：${usage.total_tokens}\n`; break
           }
         }
-        return ret
       }
+      return ret
     },
     sendMessage: (content: string, user: string) => {
       if (!messageMap[user]) {

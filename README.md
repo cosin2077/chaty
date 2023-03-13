@@ -12,6 +12,9 @@ With Chaty, your needs about ChatGPT will come to life! Chaty allows you to:
 - More services are under coding!
 
 Let Chaty take you beyond expectations and into the exciting world of ChatGPT.
+## Update
+2023.03.13 Support for WeChat robot to reply to group chats! Just add the WeChat robot into the group and @\<your-bot-name\> to start a conversation!
+
 ## Usage
 Chaty is very easy to use!  
 install ichaty first  
