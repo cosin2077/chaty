@@ -3,6 +3,7 @@ import readline from 'readline'
 import os from 'os'
 import dotenv from 'dotenv'
 import child from 'child_process'
+import { AbortController } from 'node-abort-controller'
 import { chatyDebug } from '../main/prepare/debug'
 import { appConfigPath } from '../constants'
 import path from 'path'
@@ -89,8 +90,8 @@ export const fetchApiWithTimeout = async (
   body: any,
   timeout: string | number
 ) => await new Promise((resolve, reject) => {
+  const start = ora('starting to check chaty version...').start()
   try {
-    const start = ora('starting to check chaty version...').start()
     const controller = new AbortController()
     if (params) {
       params.signal = controller.signal
@@ -112,6 +113,7 @@ export const fetchApiWithTimeout = async (
       })
   } catch (err) {
     chatyDebug((err as Error).message)
+    start.fail('check chaty version error')
     reject(err)
   }
 })
