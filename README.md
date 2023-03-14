@@ -100,7 +100,7 @@ chaty proxy default
 as a temporary proxy solution.  
 For a long-term solution, it is recommended to run on a server that supports accessing <code>api.openai.com</code> or use a stable proxy.
 
-2. when you got error like below(wechat security authorization). Auth your wechat account, make sure that you can login your wechat through https://web.wechat.com
+2. when you got error like below(wechat security authorization). Auth your wechat account(me->Pay->upper right corner···->Real-Name Authentication).
 ```
 uncaughtException AssertionError [ERR_ASSERTION]: 1 == 0
 ```

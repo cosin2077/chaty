@@ -105,7 +105,7 @@ chaty proxy default
 作为临时代理方案运行  
 长久之计还是在支持<code>api.openai.com</code>访问的服务器运行或者使用稳定proxy
 
-2.如果遇到下边的错误(微信的安全校验机制)，请先实名你的微信号，确保能登录微信网页版(https://web.wechat.com)
+2.如果遇到下边的错误(微信的安全校验机制)，请先实名你的微信号(我->支付->右上角···->实名认证)
 when you got error like this:
 ```
 uncaughtException AssertionError [ERR_ASSERTION]: 1 == 0
