@@ -93,13 +93,17 @@ Just send message with hello/你好 to start your journey~
 Chaty can also deploy Telegram Bot service, enabling your users to chat with Chaty in Telegram. Simply send a message to '@your-bot' to initiate the chatbot service.
 
 ## Troubleshooting  
-If your network cannot access api.openai.com, you can try run  
+1. If your network cannot access [https://api.openai.com](https://api.openai.com), you can try run  
 ```
 chaty proxy default
 ```
 as a temporary proxy solution.  
-For a long-term solution, it is recommended to run on a server that supports accessing api.openai.com or use a stable proxy.
+For a long-term solution, it is recommended to run on a server that supports accessing <code>api.openai.com</code> or use a stable proxy.
 
+2. when you got error like below(wechat security authorization). Auth your wechat account, make sure that you can login your wechat through https://web.wechat.com
+```
+uncaughtException AssertionError [ERR_ASSERTION]: 1 == 0
+```
 ## under coding
 
 - [] support SSE

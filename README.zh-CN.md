@@ -98,13 +98,18 @@ chaty run wechat
 Chaty还可以部署Telegram机器人服务，让您的用户可以在Telegram中与Chaty聊天。只需向"@your-bot"发送一条消息即可启动聊天机器人服务。
 
 ## Troubleshooting  
-如果你的网络访问不了api.openai.com,可以试试运行  
+1.如果你的网络访问不了[https://api.openai.com](https://api.openai.com),可以试试运行  
 ```
 chaty proxy default
 ```
 作为临时代理方案运行  
-长久之计还是在支持api.openai.com访问的服务器运行或者使用稳定proxy
+长久之计还是在支持<code>api.openai.com</code>访问的服务器运行或者使用稳定proxy
 
+2.如果遇到下边的错误(微信的安全校验机制)，请先实名你的微信号，确保能登录微信网页版(https://web.wechat.com)
+when you got error like this:
+```
+uncaughtException AssertionError [ERR_ASSERTION]: 1 == 0
+```
 ## 正在进行中
 
 - [] 支持SSE,结果分段展示,不用一次性等这么久
