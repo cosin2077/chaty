@@ -3,9 +3,9 @@ import { chatWithGPT, messageManager } from "../utils";
 export async function resetMessage(user: string) {
   messageManager.clearMessage(user);
 }
-export async function sendMessage(message: string, user: string) {
+export async function sendMessage(message: string, user: string, history?: any[]) {
   try {
-    messageManager.sendMessage(message, user);
+    messageManager.sendMessage(message, user, history);
     const messages = messageManager.getMessages(user);
     const completion = await chatWithGPT(messages!);
     const answer = completion.choices[0].message.content;

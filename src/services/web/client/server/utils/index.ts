@@ -88,9 +88,12 @@ export const chatWithGPT = async (messages: any[]) => {
 export const messageManager = (() => {
   let messageMap: Map<any, any[]> = new Map();
   return {
-    sendMessage: (content: string, user: string) => {
+    sendMessage: (content: string, user: string, history?: any[]) => {
       if (!messageMap.get(user)) {
         messageMap.set(user, []);
+      }
+      if (history && history.length) {
+        messageMap.set(user, history)
       }
       const data = messageMap.get(user);
       data?.push({ role: "user", content });
