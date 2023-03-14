@@ -12,6 +12,7 @@ import "./index.css";
 type InteractionType = {
   setHistory: React.Dispatch<React.SetStateAction<any[]>>;
   history: any[];
+  onlyUser: string;
 };
 function useLatest(value: any) {
   const ref = useRef<any[]>([]);
@@ -20,13 +21,12 @@ function useLatest(value: any) {
   });
   return ref;
 }
-function Interaction({ history, setHistory }: InteractionType) {
+function Interaction({ history, setHistory, onlyUser }: InteractionType) {
   const [placeholder, setPlaceholder] = useState("Enter something...");
   const [searchText, setSearchText] = useState("ask");
   const latestHistory = useLatest(history);
   const [value, setValue] = useState("");
   const [disabled, setDisabled] = useState(false);
-  const onlyUser = "user";
   const handleAsk = useCallback(async () => {
     if (!value) return;
     try {
