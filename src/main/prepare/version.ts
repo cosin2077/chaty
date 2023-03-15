@@ -16,13 +16,16 @@ const homedir = os.homedir()
 const npmrc = path.resolve(homedir, '.npmrc')
 const projectName = 'ichaty'
 let npmRegistry = 'https://registry.npmjs.org/'
+const cnRegistry = 'https://registry.npmmirror.com/'
+const cnRegExp = /registry\.npmmirror\.com|registry\.npm\.taobao\.org/im
 const LAST_VERSION_CHECK = 'LAST_VERSION_CHECK'
 function getRegistry () {
   if (fse.existsSync(npmrc)) {
     const content = fse.readFileSync(npmrc, 'utf8')
     const envConfig = dotenv.parse(content)
-    if (isValidUrl(envConfig.registry)) {
-      npmRegistry = envConfig.registry
+    // skip private npm registry
+    if (isValidUrl(envConfig.registry) && cnRegExp.test(envConfig.registry)) {
+      npmRegistry = cnRegistry
       chatyDebug(`use registry: ${envConfig.registry}`)
     }
   }
