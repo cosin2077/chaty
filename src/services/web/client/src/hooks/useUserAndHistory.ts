@@ -37,7 +37,6 @@ export const useUserAndHistory = () => {
   const storage = safeLocalStorage();
   if (!storage) {
     console.error('local storage not available');
-    return
   }
 
   const [user, setUser] = useState<User>(() => safeParsing(storage?.getItem(userInfoKey)) || null);

@@ -15,6 +15,7 @@ Let Chaty take you beyond expectations and into the exciting world of ChatGPT.
 ## Update
 2023.03.13 Support for WeChat robot to reply to group chats! Just add the WeChat robot into the group and @\<your-bot-name\> to start a conversation!  
 2023.03.15 ❗️Based on some feedback, WeChat may impose restrictions on robot logins, which may result in account suspension. Please try running <code>chaty run wechat</code> with a secondary account.
+2023.03.17 web dialog saving supported!
 
 ## Usage
 Chaty is very easy to use!  
