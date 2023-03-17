@@ -1,63 +1,61 @@
 import { useState, useEffect } from 'react';
 
-const userInfoKey = '__chaty_user'
-const historyKey = '__chaty_history'
-export const useUserAndHistory = () => {
-  console.log('useUserAndHistory...')
-  let storage: Storage;
+const userInfoKey = '__chaty_user';
+const historyKey = '__chaty_history';
+
+type User = string | null;
+
+function safeLocalStorage(): Storage | null {
   try {
-    storage = localStorage
-  } catch (err) {
-    console.error(err)
+    return localStorage;
+  } catch (error) {
+    console.warn(`Failed to access local storage: ${error}`);
+    return null;
   }
-  if (!storage!) {
-    console.error('localStorage not support')
+}
+
+function safeParsing(value: string | null | undefined): any {
+  try {
+    return value === null || value === undefined ? null : JSON.parse(value);
+  } catch (error) {
+    console.warn(`Failed to parse the given value: ${error}`);
+    return null;
   }
-  function serializer(value: any) {
-    if (value === null || value === undefined) {
-      value = ''
-    }
-    return JSON.stringify(value)
+}
+
+function safeStringify(value: any): string | null {
+  try {
+    return JSON.stringify(value);
+  } catch (error) {
+    console.warn(`Failed to stringify the given value: ${error}`);
+    return null;
   }
-  function deserializer(value: string | null | undefined) {
-    if (value === null || value === undefined) return
-    return JSON.parse(value)
-  }
-  function getStoreUser() {
-    return storage.getItem(userInfoKey)
-  }
-  function setStoreUser(value: string) {
-    storage.setItem(userInfoKey, value)
-    return true
-  }
-  function getStoreHistory() : any[] {
-    return deserializer(storage.getItem(historyKey))
-  }
-  function setStoreHistory(value: any[]) {
-    storage.setItem(historyKey, serializer(value))
-    return true
+}
+
+export const useUserAndHistory = () => {
+  console.log(`useUserAndHistory..`)
+  const storage = safeLocalStorage();
+  if (!storage) {
+    console.error('local storage not available');
+    return
   }
 
-  const [user, setUser] = useState(() => getStoreUser());
-  const [history, setHistory] = useState(() => getStoreHistory());
+  const [user, setUser] = useState<User>(() => safeParsing(storage?.getItem(userInfoKey)) || null);
+  const [history, setHistory] = useState<any[]>(() => safeParsing(storage?.getItem(historyKey)) || []);
+
   useEffect(() => {
     if (!user) {
-      console.log('init set user!')
-      let onlyUser = Math.random().toString(16)
-      setUser(onlyUser)
+      const newUser = Math.random().toString(16);
+      setUser(newUser);
+      storage?.setItem(userInfoKey, safeStringify(newUser) || '');
+    } else {
+      storage?.setItem(userInfoKey, safeStringify(user) || '');
     }
-    setStoreUser(user!)
-  }, [user])
+  }, [user]);
+
   useEffect(() => {
-    setStoreHistory(history)
-  }, [history])
-  const info = {
-    user,
-    history
-  }
-  const setter = {
-    setUser,
-    setHistory
-  }
-  return { info, setter }
-}
+    storage?.setItem(historyKey, safeStringify(history) || '');
+  }, [history]);
+
+  return { info: { user, history }, setter: { setUser, setHistory } };
+};

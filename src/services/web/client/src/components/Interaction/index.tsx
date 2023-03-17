@@ -15,7 +15,7 @@ type InteractionType = {
   history: any[];
 };
 function useLatest(value: any) {
-  const ref = useRef<any[]>([]);
+  const ref = useRef<any[]>(value);
   useEffect(() => {
     ref.current = value;
   });
