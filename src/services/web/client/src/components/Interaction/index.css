@@ -4,7 +4,7 @@
 .input {
   height: var(--interaction-height);
   margin: 0px 10px 0px 0px;
-  width: calc(100% - 300px);
+  width: calc(100% - 320px);
   border: solid 1px lightgray;
   border-radius: 5px;
   padding: 5px 10px;

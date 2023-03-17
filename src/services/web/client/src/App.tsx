@@ -3,15 +3,15 @@ import "./App.css";
 import Title from "./components/Title";
 import History from "./components/History";
 import Interaction from "./components/Interaction";
+import { useUserAndHistory } from "./hooks/useUserAndHistory";
 
-let onlyUser = Math.random().toString(16)
 function App() {
-  const [history, setHistory] = useState<any[]>([]);
+  const { info, setter } = useUserAndHistory()
   return (
     <div className="App">
       <Title />
-      <History history={history} />
-      <Interaction onlyUser={onlyUser} history={history} setHistory={setHistory}/>
+      <History history={info.history} />
+      <Interaction history={info.history} setHistory={setter.setHistory}/>
     </div>
   );
 }

@@ -8,20 +8,21 @@ import {
   useEffect,
 } from "react";
 import { resetMessage, sendMessage } from "../../hooks/useFetch";
+import { useUserAndHistory } from "../../hooks/useUserAndHistory";
 import "./index.css";
 type InteractionType = {
   setHistory: React.Dispatch<React.SetStateAction<any[]>>;
   history: any[];
-  onlyUser: string;
 };
 function useLatest(value: any) {
-  const ref = useRef<any[]>([]);
+  const ref = useRef<any[]>(value);
   useEffect(() => {
     ref.current = value;
   });
   return ref;
 }
-function Interaction({ history, setHistory, onlyUser }: InteractionType) {
+function Interaction({ history, setHistory }: InteractionType) {
+  const { info, setter } = useUserAndHistory()
   const [placeholder, setPlaceholder] = useState("Enter something...");
   const [searchText, setSearchText] = useState("ask");
   const latestHistory = useLatest(history);
@@ -42,7 +43,7 @@ function Interaction({ history, setHistory, onlyUser }: InteractionType) {
       setHistory(newHistory);
 
       setPlaceholder("AI is thinking...");
-      const res = await sendMessage(oldValue, onlyUser);
+      const res = await sendMessage(oldValue, info.user!, history);
 
       let historyAfter = [...latestHistory.current!];
       historyAfter.push({
@@ -60,7 +61,7 @@ function Interaction({ history, setHistory, onlyUser }: InteractionType) {
   }, [value, history]);
   const handleClear = useCallback(() => {
     setHistory([]);
-    resetMessage(onlyUser);
+    resetMessage(info.user!);
   }, [value]);
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);

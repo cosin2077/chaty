@@ -35,7 +35,7 @@ router.post('/chat/message', async (ctx, next) => {
         message: 'userId and message needed!'
       };
     }
-    const data = await sendMessage(body.message,body.userId)
+    const data = await sendMessage(body.message,body.userId, body.history)
     ctx.body = {
       data,
       code: 200,
