@@ -8,6 +8,7 @@ import { runCommandLineService } from '../commands/commandLine'
 import { runLogin } from './login'
 import { setLang } from '../commands/lang'
 import { setProxy } from '../commands/proxy'
+import { setModel, listModel } from '../commands/model'
 import { checkKey } from './checkKey'
 import { chatyDebug } from './debug'
 
@@ -87,6 +88,26 @@ To get started, just run "chaty login <openAIKey>" and enter your openAIKey. Onc
     .action((key, options, command) => {
       chatyDebug('proxy:', key, options)
       setProxy(key)
+    })
+
+  program
+    .command('model [modelName]')
+    .description(
+      'specify openai model'
+    )
+    .action((key, options, command) => {
+      chatyDebug('model:', key, options)
+      setModel(key)
+    })
+
+  program
+    .command('list-model')
+    .description(
+      'list openai model'
+    )
+    .action((key, options, command) => {
+      chatyDebug('list-model:', key, options)
+      listModel()
     })
 
   program.on('option:debug', () => {

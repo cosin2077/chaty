@@ -87,7 +87,7 @@ export async function sendMessage (message: string, user: string) {
     // chatyDebug(answer);
     // chatyDebug("-----------newAnswers----------");
     messageManager.concatAnswer(answer, user)
-    messageManager.addUsage(completion.usage, user);
+    messageManager.addUsage(completion.usage, user)
     return answer
   } catch (err) {
     messageManager.popMessage(user)
