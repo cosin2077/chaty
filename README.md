@@ -38,12 +38,13 @@ chaty run telegram // deploy a telegram chatGPT bot
 
 ## ⚙️Installation
 
+Tips: Node v16 or above version is required.  
 Chaty is a application based on Node.js, and can be installed with the following command:  
-If you have not installed NodeJS, [click here](https://nodejs.org/)
+If you have not installed NodeJS, [click here](https://nodejs.org/)  
+
 ```
 npm i -g ichaty
 ```
-
 ## 🔑Login
 
 Login with your openAI key.You can find your API key at https://platform.openai.com/account/api-keys.  

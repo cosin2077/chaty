@@ -40,9 +40,9 @@ chaty run telegram // 部署Telegram ChatGPT机器人
 
 ## 安装🤖
 
+注意：需要安装Node v16及以上版本
 Chaty是一个基于Node.js的应用程序，可以使用以下命令进行安装：  
 如果您还没有安装NodeJS，请[点击这里](https://nodejs.org/)
-
 
 ```
 npm i -g chaty
