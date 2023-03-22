@@ -6,7 +6,8 @@ const chatWithGPT = async (messages: any[]) => {
     Authorization: `Bearer ${process.env.OPEN_AI_KEY!}`
   }
   let apiUrl = chatGPTUrl
-  let { CHATY_PROXY, CHATY_SYSTEM_ROLE } = process.env
+  let { CHATY_PROXY } = process.env
+  const { CHATY_SYSTEM_ROLE } = process.env
   if (CHATY_PROXY) {
     if (CHATY_PROXY[CHATY_PROXY.length - 1] !== '/') {
       CHATY_PROXY += '/'
@@ -16,7 +17,7 @@ const chatWithGPT = async (messages: any[]) => {
   }
   if (CHATY_SYSTEM_ROLE) {
     const item = {
-      role: "system",
+      role: 'system',
       content: CHATY_SYSTEM_ROLE
     }
     if (messages[0] && messages[0].role !== 'system') {
@@ -37,9 +38,9 @@ const chatWithGPT = async (messages: any[]) => {
 
 export const messageManager = (() => {
   const messageMap = new Map<any, any[]>()
-  const usageList: Record<string, any[]> = {};
+  const usageList: Record<string, any[]> = {}
   return {
-    addUsage: (usage: any, user: string) =>{
+    addUsage: (usage: any, user: string) => {
       if (!usageList[user]) {
         usageList[user] = []
       }
@@ -96,7 +97,7 @@ export async function sendMessage (message: string, user: string) {
     // chatyDebug(answer);
     // chatyDebug("-----------newAnswers----------");
     messageManager.concatAnswer(answer, user)
-    messageManager.addUsage(completion.usage, user);
+    messageManager.addUsage(completion.usage, user)
     return answer
   } catch (err) {
     messageManager.popMessage(user)
