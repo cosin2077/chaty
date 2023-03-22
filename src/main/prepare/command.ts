@@ -8,12 +8,14 @@ import { runCommandLineService } from '../commands/commandLine'
 import { runLogin } from './login'
 import { setLang } from '../commands/lang'
 import { setProxy } from '../commands/proxy'
+import { setSystem } from '../commands/system'
 import { checkKey } from './checkKey'
 import { chatyDebug } from './debug'
+import { argv } from './arg'
 
 const program = new commander.Command()
 
-export async function registerCommand () {
+export async function registerCommand() {
   program
     .name(Object.keys(pkg.bin)[0])
     .usage('<command> [options]')
@@ -87,6 +89,19 @@ To get started, just run "chaty login <openAIKey>" and enter your openAIKey. Onc
     .action((key, options, command) => {
       chatyDebug('proxy:', key, options)
       setProxy(key)
+    })
+
+  program
+    .command('system [system]')
+    .description(
+      'set system role for chatGPT!'
+    )
+    .action((key, options, command) => {
+      chatyDebug('system:', key, options)
+      if (argv._.length > 2) {
+        key = argv._.slice(1).join(' ')
+      }
+      setSystem(key)
     })
 
   program.on('option:debug', () => {

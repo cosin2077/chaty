@@ -6,13 +6,22 @@ const chatWithGPT = async (messages: any[]) => {
     Authorization: `Bearer ${process.env.OPEN_AI_KEY!}`
   }
   let apiUrl = chatGPTUrl
-  let { CHATY_PROXY } = process.env
+  let { CHATY_PROXY, CHATY_SYSTEM_ROLE } = process.env
   if (CHATY_PROXY) {
     if (CHATY_PROXY[CHATY_PROXY.length - 1] !== '/') {
       CHATY_PROXY += '/'
     }
     headers.origin = 'https://app.uniswap.org'
     apiUrl = CHATY_PROXY + chatGPTUrl
+  }
+  if (CHATY_SYSTEM_ROLE) {
+    const item = {
+      role: "system",
+      content: CHATY_SYSTEM_ROLE
+    }
+    if (messages[0] && messages[0].role !== 'system') {
+      messages.unshift(item)
+    }
   }
   const answer = await fetchApi(
     apiUrl,
