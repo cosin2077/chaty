@@ -1,4 +1,4 @@
-import axios, { type AxiosResponse } from 'axios'
+import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios'
 import readline from 'readline'
 import os from 'os'
 import dotenv from 'dotenv'
@@ -67,19 +67,20 @@ export const fetchApi = async (
     delete body.headers
   }
   if (params) delete params.type
-  const { signal, ...restParams } = params
   if (body) delete body.type
   const headers = {
     ...type,
     ...defineHeaders,
     'User-Agent': randomUserAgent()
   }
-  const options = {
+  const options: AxiosRequestConfig = {
     method,
     headers,
-    params: restParams,
-    signal,
+    params,
     data: body
+  }
+  if (params?.signal) {
+    options.signal = params?.signal
   }
   return await axios(apiUrl, options).then((res: AxiosResponse) => res.data)
 }
