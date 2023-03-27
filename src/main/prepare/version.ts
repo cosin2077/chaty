@@ -55,13 +55,13 @@ export async function checkVersion () {
   const needCheck = isNeedCheck(lastUpdate)
   if (!needCheck) return
   chatyDebug('checkVersion...')
+  writeHomeEnv(LAST_VERSION_CHECK, String(Date.now()))
   const fullUrl = new URL(`${projectName}/latest`, npmRegistry).toString()
-  const data = await fetchApiWithTimeout(fullUrl, 'GET', {}, undefined, 3.5 * 1e3)
+  const data = await fetchApiWithTimeout(fullUrl, 'GET', {}, null, 3.5 * 1e3)
   if (data === 'timeout') {
     chatyDebug('fetchApiWithTimeout timeout')
     return
   }
-  writeHomeEnv(LAST_VERSION_CHECK, String(Date.now()))
   chatyDebug(`write home .env ${LAST_VERSION_CHECK}, ${Date.now()} succeed!`)
   const { version: latest } = data as any
   chatyDebug(pkg.version, latest)

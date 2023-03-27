@@ -101,7 +101,8 @@ export const fetchApiWithTimeout = async (
     const timer = setTimeout(() => {
       controller.abort()
       resolve('timeout')
-      start.fail('check chaty version timeout')
+      chatyDebug('check chaty version timeout')
+      start.clear()
     }, Number(timeout))
     fetchApi(apiUrl, method, params, body)
       .then((res) => {
@@ -110,12 +111,14 @@ export const fetchApiWithTimeout = async (
         clearTimeout(timer)
       })
       .catch((err) => {
-        start.fail(`check chaty version error: ${(err as Error).message}`)
+        chatyDebug(`check chaty version error: ${(err as Error).message}`)
+        start.clear()
         reject(err)
       })
   } catch (err) {
     chatyDebug((err as Error).message)
-    start.fail('check chaty version error')
+    chatyDebug('check chaty version error')
+    start.clear()
     reject(err)
   }
 })
