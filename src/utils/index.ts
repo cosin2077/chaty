@@ -67,6 +67,7 @@ export const fetchApi = async (
     delete body.headers
   }
   if (params) delete params.type
+  const { signal, ...restParams } = params
   if (body) delete body.type
   const headers = {
     ...type,
@@ -76,8 +77,8 @@ export const fetchApi = async (
   const options = {
     method,
     headers,
-    params,
-    signal: params.signal,
+    params: restParams,
+    signal,
     data: body
   }
   return await axios(apiUrl, options).then((res: AxiosResponse) => res.data)
