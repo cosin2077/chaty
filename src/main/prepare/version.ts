@@ -38,7 +38,7 @@ function formatTime (timestamp: string | undefined) {
     const ti = new Date(Number(timestamp)).toString()
     chatyDebug(`formatTime ${timestamp}, ${ti}`)
     t = Number(timestamp)
-  } catch (_) {}
+  } catch (_) { }
   return t
 }
 function isNeedCheck (lastTime: number) {
@@ -51,25 +51,29 @@ function isNeedCheck (lastTime: number) {
   return true
 }
 export async function checkVersion () {
-  const lastUpdate = formatTime(readEnvInFile(LAST_VERSION_CHECK, appEnvConfigPath))
-  const needCheck = isNeedCheck(lastUpdate)
-  if (!needCheck) return
-  chatyDebug('checkVersion...')
-  writeHomeEnv(LAST_VERSION_CHECK, String(Date.now()))
-  const fullUrl = new URL(`${projectName}/latest`, npmRegistry).toString()
-  const data = await fetchApiWithTimeout(fullUrl, 'GET', {}, null, 3.5 * 1e3)
-  if (data === 'timeout') {
-    chatyDebug('fetchApiWithTimeout timeout')
-    return
-  }
-  chatyDebug(`write home .env ${LAST_VERSION_CHECK}, ${Date.now()} succeed!`)
-  const { version: latest } = data as any
-  chatyDebug(pkg.version, latest)
-  if (semver.valid(latest) && semver.valid(pkg.version)) {
-    if (semver.gt(latest, pkg.version)) {
-      console.log(colors.green(`chaty latest version: ${latest as string}`))
-      console.log(colors.red(`local version: ${pkg.version}`))
-      console.log(boxen('please install the latest version with: npm i -g ichaty', { padding: 1 }))
+  try {
+    const lastUpdate = formatTime(readEnvInFile(LAST_VERSION_CHECK, appEnvConfigPath))
+    const needCheck = isNeedCheck(lastUpdate)
+    if (!needCheck) return
+    chatyDebug('checkVersion...')
+    writeHomeEnv(LAST_VERSION_CHECK, String(Date.now()))
+    chatyDebug(`write home .env ${LAST_VERSION_CHECK}, ${Date.now()} succeed!`)
+    const fullUrl = new URL(`${projectName}/latest`, npmRegistry).toString()
+    const data = await fetchApiWithTimeout(fullUrl, 'POST', null, null, 2.5 * 1e3)
+    if (data === 'timeout') {
+      chatyDebug('fetchApiWithTimeout timeout')
+      return
     }
+    const { version: latest } = data as any
+    chatyDebug(pkg.version, latest)
+    if (semver.valid(latest) && semver.valid(pkg.version)) {
+      if (semver.gt(latest, pkg.version)) {
+        console.log(colors.green(`chaty latest version: ${latest as string}`))
+        console.log(colors.red(`local version: ${pkg.version}`))
+        console.log(boxen('please install the latest version with: npm i -g ichaty', { padding: 1 }))
+      }
+    }
+  } catch (err) {
+    chatyDebug((err as Error).message)
   }
 }

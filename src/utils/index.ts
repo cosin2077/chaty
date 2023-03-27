@@ -76,9 +76,11 @@ export const fetchApi = async (
   const options: AxiosRequestConfig = {
     method,
     headers,
-    params,
-    data: body
+    params: { null: null },
+    data: { null: null }
   }
+  if (params) options.params = params
+  if (body) options.data = body
   if (params?.signal) {
     options.signal = params?.signal
   }
@@ -99,26 +101,28 @@ export const fetchApiWithTimeout = async (
       params.signal = controller.signal
     }
     const timer = setTimeout(() => {
+      start.stop()
       controller.abort()
       resolve('timeout')
       chatyDebug('check chaty version timeout')
-      start.clear()
     }, Number(timeout))
     fetchApi(apiUrl, method, params, body)
       .then((res) => {
-        resolve(res)
         start.succeed('check chaty version succeed')
-        clearTimeout(timer)
+        resolve(res)
       })
       .catch((err) => {
         chatyDebug(`check chaty version error: ${(err as Error).message}`)
-        start.clear()
+        start.stop()
         reject(err)
+      })
+      .finally(() => {
+        clearTimeout(timer)
       })
   } catch (err) {
     chatyDebug((err as Error).message)
     chatyDebug('check chaty version error')
-    start.clear()
+    start.stop()
     reject(err)
   }
 })
@@ -194,7 +198,7 @@ export const writeHomeEnv = function (prop: string, value: string) {
   writeFileSync(destEnvPath, newContent, 'utf-8')
 }
 
-export function spinnerStart (loadingMsg = 'loading') {
+export function spinnerStart(loadingMsg = 'loading') {
   const spinner = ora({
     text: `${loadingMsg}...`,
     spinner: {
