@@ -1,7 +1,8 @@
 import { fetchApi } from '.'
 import { chatyDebug } from '../main/prepare/debug'
 const chatGPTUrl = 'https://api.openai.com/v1/chat/completions'
-const chatWithGPT = async (messages: any[]) => {
+
+const chatWithGPT = async (messages: any[], context: string) => {
   const headers: Record<string, any> = {
     Authorization: `Bearer ${process.env.OPEN_AI_KEY!}`
   }
@@ -30,7 +31,8 @@ const chatWithGPT = async (messages: any[]) => {
     { headers },
     {
       model: 'gpt-3.5-turbo',
-      messages
+      messages,
+      context // 添加 context 参数到请求体中
     }
   )
   return answer
@@ -87,15 +89,9 @@ export async function sendMessage (message: string, user: string) {
   try {
     messageManager.sendMessage(message, user)
     const messages = messageManager.getMessages(user)
-    // chatyDebug("-----------newMessages----------");
-    // chatyDebug(messages);
-    // chatyDebug("-----------newMessages----------");
-    const completion = await chatWithGPT(messages!)
+    const context = JSON.stringify(messages) // 将聊天历史记录序列化为上下文信息
+    const completion = await chatWithGPT(messages!, context) // 传递上下文信息到 chatWithGPT 函数中
     const answer = completion.choices[0].message.content
-
-    // chatyDebug("-----------newAnswers----------");
-    // chatyDebug(answer);
-    // chatyDebug("-----------newAnswers----------");
     messageManager.concatAnswer(answer, user)
     messageManager.addUsage(completion.usage, user)
     return answer
