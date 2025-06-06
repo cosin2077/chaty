@@ -119,3 +119,5 @@ uncaughtException AssertionError [ERR_ASSERTION]: 1 == 0
 More services are under construction!(discord, telegram, slack...)
 
 Thank you for choosing Chaty! If you have any questions or suggestions, please feel free to contact us!
+
+[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")
